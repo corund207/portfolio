@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jonah Chang — Portfolio</title>
+<meta name="description" content="Jonah Chang — Python, data, AI, robotics, and web development. Builder of odometry libraries, robotic arms, and gesture-controlled interfaces.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💚</text></svg>">
+<style>
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --border: #21262d;
+    --text: #e6edf3;
+    --muted: #7d8590;
+    --accent: #10b981;
+    --accent2: #34d399;
+    --accent3: #6ee7b7;
+    --grad: linear-gradient(90deg, var(--accent2), var(--accent), #059669);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  #stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+  main, nav, footer { position: relative; z-index: 1; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.9rem 6vw;
+    background: rgba(13, 17, 23, 0.72);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav .logo { font-weight: 800; font-size: 1.1rem; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  nav .links a { color: var(--muted); text-decoration: none; margin-left: 1.6rem; font-size: 0.95rem; transition: color 0.2s; }
+  nav .links a:hover { color: var(--text); }
+
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 0 6vw;
+  }
+  .hero h1 {
+    font-size: clamp(2.6rem, 8vw, 4.8rem);
+    font-weight: 800; letter-spacing: -1px;
+    background: var(--grad);
+    background-size: 200% auto;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: shimmer 6s linear infinite;
+  }
+  @keyframes shimmer { to { background-position: 200% center; } }
+  .typing {
+    font-family: 'Cascadia Code', Consolas, monospace;
+    font-size: clamp(1rem, 3vw, 1.35rem);
+    color: var(--muted); margin-top: 1rem; min-height: 1.8em;
+  }
+  .typing::after { content: '▌'; color: var(--accent2); animation: blink 1s step-end infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .cta { margin-top: 2.4rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+  .btn {
+    padding: 0.75rem 1.7rem; border-radius: 10px; text-decoration: none;
+    font-weight: 600; font-size: 0.95rem; transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary { background: var(--grad); color: #fff; box-shadow: 0 4px 24px rgba(16, 185, 129, 0.35); }
+  .btn-ghost { border: 1px solid var(--border); color: var(--text); background: var(--panel); }
+  .scroll-hint { position: absolute; bottom: 2rem; color: var(--muted); font-size: 1.4rem; animation: bob 2s ease-in-out infinite; }
+  @keyframes bob { 50% { transform: translateY(8px); } }
+
+  section { max-width: 1080px; margin: 0 auto; padding: 5.5rem 6vw; }
+  section h2 {
+    font-size: 2rem; font-weight: 800; margin-bottom: 2.2rem;
+    display: flex; align-items: center; gap: 0.9rem;
+  }
+  section h2::after { content: ''; flex: 1; height: 2px; background: linear-gradient(90deg, var(--accent), transparent); border-radius: 1px; }
+
+  .about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 2.5rem; align-items: center; }
+  .about-grid p { color: var(--muted); margin-bottom: 1rem; }
+  .about-grid strong { color: var(--text); }
+  .stack-img { width: 100%; text-align: center; }
+  .stack-img img { max-width: 100%; }
+  @media (max-width: 760px) { .about-grid { grid-template-columns: 1fr; } }
+
+  .filter-row { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.8rem; }
+  .chip {
+    border: 1px solid var(--border); background: var(--panel); color: var(--muted);
+    padding: 0.35rem 0.95rem; border-radius: 999px; font-size: 0.85rem;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .chip:hover, .chip.active { color: #fff; border-color: var(--accent); background: rgba(16, 185, 129, 0.18); }
+
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.3rem; }
+  .card {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
+    padding: 1.4rem; display: flex; flex-direction: column; gap: 0.7rem;
+    text-decoration: none; color: inherit;
+    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    opacity: 0; transform: translateY(24px);
+  }
+  .card.visible { opacity: 1; transform: translateY(0); transition: opacity 0.6s, transform 0.6s, border-color 0.25s, box-shadow 0.25s; }
+  .card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 34px rgba(16, 185, 129, 0.18); }
+  .card h3 { font-size: 1.1rem; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+  .card h3 .stars { font-size: 0.85rem; color: var(--muted); font-weight: 400; white-space: nowrap; }
+  .card p { color: var(--muted); font-size: 0.92rem; flex: 1; }
+  .card .meta { display: flex; align-items: center; gap: 1rem; font-size: 0.82rem; color: var(--muted); }
+  .lang-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 0.4rem; vertical-align: -1px; }
+  .card .site-link { color: var(--accent2); font-size: 0.82rem; }
+  .projects-note { color: var(--muted); font-size: 0.85rem; margin-top: 1.4rem; text-align: center; }
+
+  .contact-box {
+    text-align: center; background: var(--panel); border: 1px solid var(--border);
+    border-radius: 18px; padding: 3rem 2rem;
+  }
+  .contact-box p { color: var(--muted); max-width: 480px; margin: 0.6rem auto 1.8rem; }
+  .socials { display: flex; gap: 1.1rem; justify-content: center; }
+  .socials a { display: inline-flex; transition: transform 0.2s; }
+  .socials a:hover { transform: translateY(-4px) scale(1.08); }
+  .socials img { height: 48px; border-radius: 10px; }
+
+  footer {
+    text-align: center; padding: 2.2rem; color: var(--muted); font-size: 0.85rem;
+    border-top: 1px solid var(--border); margin-top: 3rem;
+  }
+  footer .grad-text { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 600; }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s, transform 0.7s; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+
+<nav>
+  <span class="logo">JC</span>
+  <span class="links">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </span>
+</nav>
+
+<main>
+  <div class="hero">
+    <h1>Jonah Chang</h1>
+    <div class="typing" id="typing"></div>
+    <div class="cta">
+      <a class="btn btn-primary" href="#projects">View My Work</a>
+      <a class="btn btn-ghost" href="https://github.com/jonahchang207" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+    <div class="scroll-hint">▾</div>
+  </div>
+
+  <section id="about" class="reveal">
+    <h2>About</h2>
+    <div class="about-grid">
+      <div>
+        <p>I build things across <strong>Python, data, and AI</strong> — from
+        <strong>robotics</strong> (VEX V5 odometry &amp; motion control, a 6DOF robotic arm with
+        YOLO-based vision) to <strong>gesture-controlled interfaces</strong> and
+        <strong>web apps</strong> in JavaScript and TypeScript.</p>
+        <p>I like projects where software meets the physical world: position tracking,
+        computer vision, motion planning, and the tooling that makes them easier for others to use.</p>
+      </div>
+      <div class="stack-img">
+        <img src="https://skillicons.dev/icons?i=python,sklearn,opencv,js,ts,react,nodejs,cpp,dart,flutter,git,vscode&theme=dark&perline=4" alt="tech stack"/>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="reveal">
+    <h2>Projects</h2>
+    <div class="filter-row" id="filters"></div>
+    <div class="projects-grid" id="grid"></div>
+    <p class="projects-note">Cards load live from the GitHub API — always up to date.</p>
+  </section>
+
+  <section id="contact" class="reveal">
+    <div class="contact-box">
+      <h2 style="justify-content:center">Get In Touch</h2>
+      <p>Want to collaborate, ask about a project, or just say hi? My inbox is open.</p>
+      <div class="socials">
+        <a href="mailto:saphirredragon207@gmail.com" title="Email"><img src="https://skillicons.dev/icons?i=gmail" alt="email"/></a>
+        <a href="https://github.com/jonahchang207" target="_blank" rel="noopener" title="GitHub"><img src="https://skillicons.dev/icons?i=github&theme=dark" alt="github"/></a>
+        <a href="https://www.linkedin.com/in/YOUR_LINKEDIN" target="_blank" rel="noopener" title="LinkedIn"><img src="https://skillicons.dev/icons?i=linkedin" alt="linkedin"/></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span class="grad-text">Jonah Chang</span> · built by hand, deployed on Vercel
+</footer>
+
+<script>
+/* ---------- starfield ---------- */
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+let stars = [];
+function initStars() {
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+  stars = Array.from({ length: Math.min(140, innerWidth / 8) }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 1.4 + 0.3,
+    speed: Math.random() * 0.25 + 0.05,
+    phase: Math.random() * Math.PI * 2,
+  }));
+}
+function drawStars(t) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (const s of stars) {
+    const alpha = 0.35 + 0.5 * Math.abs(Math.sin(t / 1400 + s.phase));
+    ctx.fillStyle = `rgba(110, 231, 183, ${alpha})`;
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fill();
+    s.y -= s.speed;
+    if (s.y < -2) { s.y = canvas.height + 2; s.x = Math.random() * canvas.width; }
+  }
+  requestAnimationFrame(drawStars);
+}
+initStars();
+addEventListener('resize', initStars);
+requestAnimationFrame(drawStars);
+
+/* ---------- typing rotator ---------- */
+const phrases = [
+  'Python · Data · AI',
+  'Robotics & motion control',
+  'Computer vision projects',
+  'Web development with JS / TS',
+];
+const typingEl = document.getElementById('typing');
+let pi = 0, ci = 0, deleting = false;
+function typeTick() {
+  const phrase = phrases[pi];
+  typingEl.textContent = phrase.slice(0, ci);
+  let delay = deleting ? 35 : 70;
+  if (!deleting && ci === phrase.length) { deleting = true; delay = 1800; }
+  else if (deleting && ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; delay = 350; }
+  else ci += deleting ? -1 : 1;
+  setTimeout(typeTick, delay);
+}
+typeTick();
+
+/* ---------- scroll reveal ---------- */
+const observer = new IntersectionObserver(
+  (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add('visible')),
+  { threshold: 0.12 }
+);
+document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+/* ---------- projects (live from GitHub, with baked-in fallback) ---------- */
+const LANG_COLORS = {
+  Python: '#3572A5', 'C++': '#f34b7d', TypeScript: '#3178c6', JavaScript: '#f1e05a',
+  Dart: '#00B4AB', HTML: '#e34c26', CSS: '#563d7c', Rust: '#dea584',
+  'C#': '#178600', 'Jupyter Notebook': '#DA5B0B', MDX: '#fcb32c',
+};
+const FEATURED_ORDER = [
+  'odyssey', 'odyssey-sim', 'IRIS-Progect', 'handwave', 'Vortex',
+  'FrameSight', 'O.R.B.I.T', 'Harbor', 'AetherWeave_Network_Tycoon',
+];
+const FALLBACK = [
+  { name: 'odyssey', description: 'Odometry & motion control template for VEX V5 (PROS) — position tracking, PID motions, boomerang, pure pursuit', language: 'C++', stargazers_count: 0, html_url: 'https://github.com/jonahchang207/odyssey', homepage: 'https://jonahchang207.github.io/odyssey/' },
+  { name: 'odyssey-sim', description: 'Browser-based simulator for the Odyssey VEX V5 odometry & motion control library', language: 'TypeScript', stargazers_count: 0, html_url: 'https://github.com/jonahchang207/odyssey-sim', homepage: '' },
+  { name: 'IRIS-Progect', description: '6DOF 3D-printed robotic arm with YOLOv11 screw detection, analytical IK, and Teensy 4.1 stepper control', language: 'Jupyter Notebook', stargazers_count: 0, html_url: 'https://github.com/jonahchang207/IRIS-Progect', homepage: '' },
+  { name: 'handwave', description: 'Control your Mac with hand gestures through the webcam — MediaPipe hand tracking turned into mouse, scroll, and desktop-switching actions', language: 'Python', stargazers_count: 0, html_url: 'https://github.com/jonahchang207/handwave', homepage: '' },
+  { name: 'Vortex', description: 'VEX Robotics companion iOS app — Flutter + Supabase, Liquid Glass UI, OPR/TrueSkill analytics', language: 'Dart', stargazers_count: 0, html_url: 'https://github.com/jonahchang207/Vortex', homepage: '' },
+  { name: 'FrameSight', description: 'Computer vision project in Python', language: 'Python', stargazers_count: 1, html_url: 'https://github.com/jonahchang207/FrameSight', homepage: '' },
+  { name: 'O.R.B.I.T', description: 'Azynt research notes and local file reader', language: 'HTML', stargazers_count: 0, html_url: 'https://github.com/jonahchang207/O.R.B.I.T', homepage: 'https://azynt.vercel.app' },
+  { name: 'Harbor', description: 'Local web app to download and convert YouTube videos', language: 'C#', stargazers_count: 0, html_url: 'https://github.com/jonahchang207/Harbor', homepage: '' },
+  { name: 'AetherWeave_Network_Tycoon', description: 'AetherWeave: The Loom of Connectivity — ISP network tycoon (Unity + Rust)', language: 'Rust', stargazers_count: 0, html_url: 'https://github.com/jonahchang207/AetherWeave_Network_Tycoon', homepage: '' },
+];
+
+let allRepos = [];
+let activeLang = 'All';
+
+function render() {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+  const repos = allRepos.filter((r) => activeLang === 'All' || r.language === activeLang);
+  for (const r of repos) {
+    const card = document.createElement('a');
+    card.className = 'card';
+    card.href = r.html_url;
+    card.target = '_blank';
+    card.rel = 'noopener';
+    const dot = `<span class="lang-dot" style="background:${LANG_COLORS[r.language] || '#10b981'}"></span>`;
+    card.innerHTML = `
+      <h3>${r.name.replace(/[_-]/g, ' ')} <span class="stars">★ ${r.stargazers_count}</span></h3>
+      <p>${r.description || 'No description yet.'}</p>
+      <div class="meta">
+        ${r.language ? `<span>${dot}${r.language}</span>` : ''}
+        ${r.homepage ? `<span class="site-link">live site ↗</span>` : ''}
+      </div>`;
+    grid.appendChild(card);
+    observer.observe(card);
+  }
+}
+
+function renderFilters() {
+  const langs = ['All', ...new Set(allRepos.map((r) => r.language).filter(Boolean))];
+  const row = document.getElementById('filters');
+  row.innerHTML = '';
+  for (const l of langs) {
+    const chip = document.createElement('button');
+    chip.className = 'chip' + (l === activeLang ? ' active' : '');
+    chip.textContent = l;
+    chip.onclick = () => { activeLang = l; renderFilters(); render(); };
+    row.appendChild(chip);
+  }
+}
+
+function sortRepos(repos) {
+  return repos
+    .filter((r) => !r.fork && r.name !== 'jonahchang207' && r.name !== 'docs' && r.description)
+    .sort((a, b) => {
+      const ai = FEATURED_ORDER.indexOf(a.name), bi = FEATURED_ORDER.indexOf(b.name);
+      if (ai !== -1 || bi !== -1) return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+      return new Date(b.pushed_at || 0) - new Date(a.pushed_at || 0);
+    });
+}
+
+fetch('https://api.github.com/users/jonahchang207/repos?per_page=100')
+  .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
+  .then((repos) => { allRepos = sortRepos(repos); renderFilters(); render(); })
+  .catch(() => { allRepos = FALLBACK; renderFilters(); render(); });
+</script>
+</body>
+</html>
