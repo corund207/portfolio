@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jonah Chang — Portfolio</title>
 <meta name="description" content="Jonah Chang — Python, data, AI, robotics, and web development. Builder of odometry libraries, robotic arms, and gesture-controlled interfaces.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jonah Chang — Portfolio">
+<meta property="og:description" content="Python, data, AI, robotics, and web. Odometry libraries, a 6DOF vision-guided arm, gesture control, and more.">
+<meta property="og:url" content="https://portfolio-five-omega-y8vld3apbj.vercel.app/">
+<meta property="og:image" content="https://opengraph.githubassets.com/1/jonahchang207/portfolio">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Jonah Chang — Portfolio">
+<meta name="twitter:description" content="Python, data, AI, robotics, and web development.">
+<meta name="twitter:image" content="https://opengraph.githubassets.com/1/jonahchang207/portfolio">
 <link rel="icon" href="data:,">
 <style>
   :root {
@@ -106,13 +115,15 @@
     transition: transform 0.18s ease, border-color 0.25s, box-shadow 0.25s;
     will-change: transform, opacity;
   }
-  .card.dealt { animation: dealIn 0.72s cubic-bezier(0.16, 0.8, 0.24, 1) forwards; }
+  .card.dealt { animation: irisIn 0.85s cubic-bezier(0.22, 0.9, 0.26, 1) forwards; }
   .card.shown { opacity: 1; }
   .card:hover { border-color: var(--accent); box-shadow: 0 16px 44px rgba(16, 185, 129, 0.22); }
-  @keyframes dealIn {
-    0%   { opacity: 0; transform: translateY(-80px) rotateX(-45deg) rotateZ(-9deg) scale(0.78); }
-    55%  { opacity: 1; }
-    100% { opacity: 1; transform: translateY(0) rotateX(0) rotateZ(0) scale(1); }
+  @keyframes irisIn {
+    0%   { opacity: 0; transform: translateX(160px) rotate(200deg) scale(0.1); }
+    35%  { opacity: 1; }
+    65%  { transform: translateX(40px) rotate(38deg) scale(0.9); }
+    82%  { transform: translateX(-14px) rotate(-7deg) scale(1.05); }
+    100% { opacity: 1; transform: translateX(0) rotate(0deg) scale(1); }
   }
   .card h3 { font-size: 1.1rem; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
   .card h3 .stars { font-size: 0.85rem; color: var(--muted); font-weight: 400; white-space: nowrap; }
@@ -121,6 +132,29 @@
   .lang-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 0.4rem; vertical-align: -1px; }
   .card .site-link { color: var(--accent2); font-size: 0.82rem; }
   .projects-note { color: var(--muted); font-size: 0.85rem; margin-top: 1.4rem; text-align: center; }
+
+  .card-thumb {
+    width: 100%; aspect-ratio: 2 / 1; object-fit: cover;
+    border-radius: 8px; border: 1px solid var(--border); background: #0d1117;
+    margin-bottom: 0.3rem;
+  }
+
+  .featured-card {
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 2rem; align-items: center;
+    background: var(--panel); border: 1px solid var(--border); border-radius: 18px;
+    padding: 1.7rem; position: relative; overflow: hidden;
+  }
+  .featured-card::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(620px circle at 100% 0, rgba(16, 185, 129, 0.14), transparent 60%);
+  }
+  .featured-card img.shot { width: 100%; border-radius: 12px; border: 1px solid var(--border); display: block; }
+  .featured-tag { display: inline-block; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent2); font-weight: 700; margin-bottom: 0.6rem; }
+  .featured-card h3 { font-size: 1.7rem; margin-bottom: 0.6rem; }
+  .featured-card p { color: var(--muted); margin-bottom: 1.2rem; }
+  .featured-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.4rem; }
+  .featured-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+  @media (max-width: 760px) { .featured-card { grid-template-columns: 1fr; } }
 
   .contact-box {
     text-align: center; background: var(--panel); border: 1px solid var(--border);
@@ -178,6 +212,29 @@
       </div>
       <div class="stack-img">
         <img src="https://skillicons.dev/icons?i=python,sklearn,opencv,js,ts,react,nodejs,cpp,dart,flutter,git,vscode&theme=dark&perline=4" alt="tech stack"/>
+      </div>
+    </div>
+  </section>
+
+  <section id="featured" class="reveal">
+    <h2>Featured</h2>
+    <div class="featured-card">
+      <img class="shot" src="https://opengraph.githubassets.com/1/jonahchang207/odyssey" alt="odyssey preview" loading="lazy"/>
+      <div>
+        <span class="featured-tag">◆ Flagship Project</span>
+        <h3>odyssey</h3>
+        <p>An odometry &amp; motion-control template for VEX V5 (PROS): real-time position tracking,
+        PID point &amp; turn motions, a boomerang controller, and pure-pursuit path following — the
+        autonomous-motion stack a whole competition robot is built on.</p>
+        <div class="featured-badges">
+          <img src="https://img.shields.io/github/languages/top/jonahchang207/odyssey?style=flat-square&color=10b981&labelColor=161b22" alt="top language"/>
+          <img src="https://img.shields.io/github/stars/jonahchang207/odyssey?style=flat-square&color=10b981&labelColor=161b22&logo=github" alt="stars"/>
+          <img src="https://img.shields.io/github/last-commit/jonahchang207/odyssey?style=flat-square&color=10b981&labelColor=161b22" alt="last commit"/>
+        </div>
+        <div class="featured-actions">
+          <a class="btn btn-primary" href="https://github.com/jonahchang207/odyssey" target="_blank" rel="noopener">View Repo ↗</a>
+          <a class="btn btn-ghost" href="https://jonahchang207.github.io/odyssey/" target="_blank" rel="noopener">Live Docs ↗</a>
+        </div>
       </div>
     </div>
   </section>
@@ -334,7 +391,7 @@ let activeLang = 'All';
 function render() {
   const grid = document.getElementById('grid');
   grid.innerHTML = '';
-  const repos = allRepos.filter((r) => activeLang === 'All' || r.language === activeLang);
+  const repos = allRepos.filter((r) => r.name !== 'odyssey' && (activeLang === 'All' || r.language === activeLang));
   for (const r of repos) {
     const card = document.createElement('a');
     card.className = 'card';
@@ -343,6 +400,7 @@ function render() {
     card.rel = 'noopener';
     const dot = `<span class="lang-dot" style="background:${LANG_COLORS[r.language] || '#10b981'}"></span>`;
     card.innerHTML = `
+      <img class="card-thumb" src="https://opengraph.githubassets.com/1/jonahchang207/${r.name}" alt="${r.name} preview" loading="lazy"/>
       <h3>${r.name.replace(/[_-]/g, ' ')} <span class="stars">★ ${r.stargazers_count}</span></h3>
       <p>${r.description || 'No description yet.'}</p>
       <div class="meta">
