@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Robotic arm kinematics diagram">
+  <rect width="1200" height="630" fill="#1438c7"/>
+  <g fill="none" stroke="#dce4ff" stroke-width="24" stroke-linecap="round">
+    <path d="M170 555h310M320 555L430 420 610 360 760 210 970 142"/>
+  </g>
+  <g fill="#f5f3ec" stroke="#ff5b19" stroke-width="12"><circle cx="320" cy="555" r="32"/><circle cx="430" cy="420" r="32"/><circle cx="610" cy="360" r="32"/><circle cx="760" cy="210" r="32"/></g>
+  <g stroke="#ff5b19" stroke-width="10"><path d="M930 142h110M985 87v110"/></g>
+  <g fill="#dce4ff" font-family="monospace" font-size="26"><text x="55" y="70">ARTICULATED ROBOTIC ARM</text><text x="735" y="580">JOINT CONTROL</text></g>
+</svg>

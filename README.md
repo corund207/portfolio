@@ -1,19 +1,27 @@
-# Portfolio
+# Jonah Chang Portfolio
 
-Single-page portfolio for Jonah Chang. Pure HTML/CSS/JS, no build step, no dependencies.
+A single-page portfolio for robotics and systems work, built as a bright “Control Atlas” rather than a conventional developer dashboard.
 
-- Live project cards pulled from the GitHub API (with a baked-in fallback if the API is rate-limited)
-- Animated starfield, typing rotator, gradient shimmer, scroll reveals, language filter
+## What changed
 
-## Deploy on Vercel
+- Experience-led hero with a code-native odometry route
+- Gapless flagship project bento
+- Expandable discipline explorer
+- Live GitHub project rail with a local fallback
+- Real GSAP route drawing, pinned storytelling, and scrubbed text reveal
+- Keyboard focus, reduced-motion support, responsive layouts, and no-build deployment
+- Durable product and design documentation in `PRODUCT.md`, `DESIGN.md`, and `.impeccable/`
 
-1. Push this folder to a GitHub repo.
-2. Import it at [vercel.com/new](https://vercel.com/new) — no config needed, it's static.
-3. (Optional) Set the project's domain to `jonahchang.vercel.app` to match the README link.
+## Preview
 
-Or just open `index.html` locally to preview.
+Run any static server from this directory:
 
-## Edit
+```powershell
+python -m http.server 4173
+```
 
-Everything's in `index.html`. To change socials, update the `YOUR_LINKEDIN` link.
-Project cards need no editing — they follow your repos automatically.
+Then open `http://localhost:4173`.
+
+## Deploy
+
+The site remains static and can be deployed directly to Vercel, Netlify, GitHub Pages, or any static host. No build step is required.

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Odometry path diagram">
+  <rect width="1200" height="630" fill="#0c258d"/>
+  <g stroke="#dce4ff" stroke-width="2" opacity=".24">
+    <path d="M0 105h1200M0 210h1200M0 315h1200M0 420h1200M0 525h1200"/>
+    <path d="M200 0v630M400 0v630M600 0v630M800 0v630M1000 0v630"/>
+  </g>
+  <path d="M-40 470C145 245 290 548 478 326S795 116 910 330S1085 408 1240 190" fill="none" stroke="#ff5b19" stroke-width="18"/>
+  <g fill="#f5f3ec" stroke="#ff5b19" stroke-width="12"><circle cx="478" cy="326" r="24"/><circle cx="910" cy="330" r="24"/></g>
+  <g fill="#dce4ff" font-family="monospace" font-size="28"><text x="55" y="70">X / Y / HEADING</text><text x="830" y="575">PURE PURSUIT</text></g>
+</svg>

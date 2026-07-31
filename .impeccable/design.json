@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-30T00:00:00-04:00",
+  "title": "Design System: Jonah Chang Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "atlas-cobalt": {"role":"primary","displayName":"Atlas Cobalt","canonical":"#1438c7","tonalRamp":["#08133f","#0c1f69","#102b96","#1438c7","#3f60d6","#7188e3","#a9b8ef","#e7ebfb"]},
+      "signal-orange": {"role":"secondary","displayName":"Signal Orange","canonical":"#ff5b19","tonalRamp":["#451300","#752000","#a83200","#dc4607","#ff5b19","#ff854f","#ffb28d","#ffe4d6"]},
+      "route-white": {"role":"neutral","displayName":"Route White","canonical":"#f5f3ec","tonalRamp":["#25241f","#45443e","#69675f","#8e8c84","#b4b1aa","#d1cec7","#e8e5de","#f8f7f2"]},
+      "graphite-ink": {"role":"neutral","displayName":"Graphite Ink","canonical":"#121212","tonalRamp":["#121212","#292929","#444444","#626262","#858585","#aaaaaa","#d1d1d1","#f2f2f2"]}
+    },
+    "typographyMeta": {
+      "display": {"displayName":"Display","purpose":"Hero and chapter theses only."},
+      "body": {"displayName":"Body","purpose":"Project explanations and narrative."},
+      "label": {"displayName":"Measurement","purpose":"Languages, coordinates, and operational state only."}
+    },
+    "shadows": [
+      {"name":"hard-plate","value":"7px 7px 0 #121212","purpose":"Interactive lift and stacked-signage depth."}
+    ],
+    "motion": [
+      {"name":"route-draw","value":"2.2s cubic-bezier(.16,1,.3,1)","purpose":"Draw the hero route once."},
+      {"name":"system-expand","value":"700ms cubic-bezier(.16,1,.3,1)","purpose":"Expand a selected discipline panel."}
+    ],
+    "breakpoints": [
+      {"name":"mobile","value":"760px"},
+      {"name":"compact-desktop","value":"1100px"}
+    ]
+  },
+  "components": [
+    {
+      "name":"Primary Button",
+      "kind":"button",
+      "refersTo":"button-primary",
+      "description":"Signal-orange action plate.",
+      "html":"<a class=\"ds-btn-primary\" href=\"#\">EXPLORE THE WORK →</a>",
+      "css":".ds-btn-primary{display:inline-flex;background:var(--orange,#ff5b19);color:var(--ink,#121212);padding:14px 20px;border:1px solid var(--ink,#121212);font:800 16px 'Cabinet Grotesk',Arial,sans-serif;text-decoration:none;transition:transform .25s,box-shadow .25s}.ds-btn-primary:hover{transform:translate(-3px,-3px);box-shadow:7px 7px 0 var(--ink,#121212)}.ds-btn-primary:focus-visible{outline:3px solid var(--orange,#ff5b19);outline-offset:4px}"
+    },
+    {
+      "name":"Route Node",
+      "kind":"custom",
+      "description":"Semantic destination on a connected route.",
+      "html":"<div class=\"ds-route\"><i></i><span></span><i></i></div>",
+      "css":".ds-route{display:flex;align-items:center;width:260px}.ds-route i{width:14px;height:14px;border:3px solid #1438c7;border-radius:50%}.ds-route span{height:3px;flex:1;background:#1438c7}"
+    },
+    {
+      "name":"Project Plate",
+      "kind":"card",
+      "description":"Flat evidence container with state-only elevation.",
+      "html":"<a class=\"ds-project\" href=\"#\"><small>C++ · PROS</small><strong>ODYSSEY</strong><span>OPEN REPOSITORY →</span></a>",
+      "css":".ds-project{display:grid;gap:14px;width:300px;padding:24px;border:1px solid #121212;background:#fffdf7;color:#121212;text-decoration:none;font-family:'Cabinet Grotesk',Arial,sans-serif;transition:transform .25s,box-shadow .25s}.ds-project small{font-family:Consolas,monospace}.ds-project strong{font-size:40px}.ds-project:hover{transform:translate(-3px,-3px);box-shadow:7px 7px 0 #121212}.ds-project:focus-visible{outline:3px solid #ff5b19;outline-offset:4px}"
+    }
+  ],
+  "narrative": {
+    "northStar":"The Control Atlas",
+    "overview":"Railway control diagrams, plotted robot paths, and precision engineering documents become one bright portfolio system. Work is organized as connected destinations.",
+    "keyCharacteristics":["Large cobalt fields and route-white working surfaces","Signal orange reserved for action and active state","Oversized Cabinet Grotesk against factual measurement text","Route topology and clipped evidence instead of generic card chrome","Motion that explains connection, sequence, or cause"],
+    "rules":[{"name":"The Signal Rule","body":"Orange always communicates action, direction, or live state.","section":"colors"},{"name":"The Wide-Type Rule","body":"Display copy receives enough width to remain two lines on desktop and no more than three on narrow screens.","section":"typography"},{"name":"The Diagram-First Rule","body":"Structure must remain legible with all decorative depth removed.","section":"elevation"}],
+    "dos":["Do lead with working project evidence and code-native motion.","Do use route changes, nodes, and line weight to expose information architecture.","Do keep body copy within a readable 65–75 character measure.","Do preserve keyboard, reduced-motion, and no-API fallbacks."],
+    "donts":["Don't use stars, neon glow, gradient text, glass cards, or a generic dark developer theme.","Don't invent telemetry, testimonials, clients, awards, or metrics.","Don't turn every item into the same rounded card.","Don't use monospace as the primary voice."]
+  }
+}

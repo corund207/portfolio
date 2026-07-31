@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Hand landmark tracking diagram">
+  <rect width="1200" height="630" fill="#0c258d"/>
+  <g fill="none" stroke="#dce4ff" stroke-width="12" stroke-linecap="round">
+    <path d="M470 520L425 397 405 275 425 126M470 520L495 350 535 188 558 70M470 520L570 360 640 210 680 108M470 520L640 408 745 285 800 190M470 520L655 485 800 430 885 372"/>
+  </g>
+  <g fill="#ff5b19" stroke="#f5f3ec" stroke-width="7">
+    <circle cx="470" cy="520" r="18"/><circle cx="425" cy="397" r="18"/><circle cx="405" cy="275" r="18"/><circle cx="425" cy="126" r="18"/>
+    <circle cx="495" cy="350" r="18"/><circle cx="535" cy="188" r="18"/><circle cx="558" cy="70" r="18"/>
+    <circle cx="570" cy="360" r="18"/><circle cx="640" cy="210" r="18"/><circle cx="680" cy="108" r="18"/>
+    <circle cx="640" cy="408" r="18"/><circle cx="745" cy="285" r="18"/><circle cx="800" cy="190" r="18"/>
+    <circle cx="655" cy="485" r="18"/><circle cx="800" cy="430" r="18"/><circle cx="885" cy="372" r="18"/>
+  </g>
+  <text x="55" y="70" fill="#dce4ff" font-family="monospace" font-size="28">21 LANDMARKS / GESTURE MAP</text>
+</svg>

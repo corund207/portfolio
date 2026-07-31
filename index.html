@@ -1,445 +1,293 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--
+THESIS: A live control atlas for software that moves; it refuses the dark glowing developer dashboard.
+OWN-WORLD: Atlas cobalt fields, route-white plates, graphite rules, signal-orange state, and transit-map topology.
+STORY: Visitors see motion, follow the system through flagship work, inspect the wider project network, then make contact.
+FIRST VIEWPORT: A split navigation floats above a centered two-line thesis crossed by an animated odometry route and two actions.
+FORM: Grounded direction 6, express-aisle staging, seed 6fac0315; quick evaluation with clear junctions into deeper evidence.
+-->
+<html lang="en" class="no-js">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jonah Chang — Portfolio</title>
-<meta name="description" content="Jonah Chang — Python, data, AI, robotics, and web development. Builder of odometry libraries, robotic arms, and gesture-controlled interfaces.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jonah Chang — Portfolio">
-<meta property="og:description" content="Python, data, AI, robotics, and web. Odometry libraries, a 6DOF vision-guided arm, gesture control, and more.">
-<meta property="og:url" content="https://portfolio-five-omega-y8vld3apbj.vercel.app/">
-<meta property="og:image" content="https://opengraph.githubassets.com/1/jonahchang207/portfolio">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Jonah Chang — Portfolio">
-<meta name="twitter:description" content="Python, data, AI, robotics, and web development.">
-<meta name="twitter:image" content="https://opengraph.githubassets.com/1/jonahchang207/portfolio">
-<link rel="icon" href="data:,">
-<style>
-  :root {
-    --bg: #0D0E11;
-    --panel: #16181D;
-    --border: #22252C;
-    --text: #F3F4F6;
-    --muted: #8A90A0;
-    --accent: #FF5C50;
-    --accent2: #FF8078;
-    --accent3: #2CD4A0;
-    --grad: linear-gradient(90deg, #FF8078, #FF5C50, #E23D30);
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-  #stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-  main, nav, footer { position: relative; z-index: 1; }
-
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 10;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 0.9rem 6vw;
-    background: rgba(13, 17, 23, 0.72);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-  nav .logo { font-weight: 800; font-size: 1.1rem; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  nav .links a { color: var(--muted); text-decoration: none; margin-left: 1.6rem; font-size: 0.95rem; transition: color 0.2s; }
-  nav .links a:hover { color: var(--text); }
-
-  .hero {
-    min-height: 100vh;
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    text-align: center; padding: 0 6vw;
-  }
-  .hero h1 {
-    font-size: clamp(2.6rem, 8vw, 4.8rem);
-    font-weight: 800; letter-spacing: -1px;
-    background: var(--grad);
-    background-size: 200% auto;
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-    animation: shimmer 6s linear infinite;
-  }
-  @keyframes shimmer { to { background-position: 200% center; } }
-  .typing {
-    font-family: 'Cascadia Code', Consolas, monospace;
-    font-size: clamp(1rem, 3vw, 1.35rem);
-    color: var(--muted); margin-top: 1rem; min-height: 1.8em;
-  }
-  .typing::after { content: '▌'; color: var(--accent2); animation: blink 1s step-end infinite; }
-  @keyframes blink { 50% { opacity: 0; } }
-  .cta { margin-top: 2.4rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
-  .btn {
-    padding: 0.75rem 1.7rem; border-radius: 10px; text-decoration: none;
-    font-weight: 600; font-size: 0.95rem; transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .btn:hover { transform: translateY(-2px); }
-  .btn-primary { background: var(--grad); color: #fff; box-shadow: 0 4px 24px rgba(255, 92, 80, 0.35); }
-  .btn-ghost { border: 1px solid var(--border); color: var(--text); background: var(--panel); }
-  .scroll-hint { position: absolute; bottom: 2rem; color: var(--muted); font-size: 1.4rem; animation: bob 2s ease-in-out infinite; }
-  @keyframes bob { 50% { transform: translateY(8px); } }
-
-  section { max-width: 1080px; margin: 0 auto; padding: 5.5rem 6vw; }
-  section h2 {
-    font-size: 2rem; font-weight: 800; margin-bottom: 2.2rem;
-    display: flex; align-items: center; gap: 0.9rem;
-  }
-  section h2::after { content: ''; flex: 1; height: 2px; background: linear-gradient(90deg, var(--accent), transparent); border-radius: 1px; }
-
-  .about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 2.5rem; align-items: center; }
-  .about-grid p { color: var(--muted); margin-bottom: 1rem; }
-  .about-grid strong { color: var(--text); }
-  .stack-img { width: 100%; text-align: center; }
-  .stack-img img { max-width: 100%; }
-  @media (max-width: 760px) { .about-grid { grid-template-columns: 1fr; } }
-
-  .filter-row { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.8rem; }
-  .chip {
-    border: 1px solid var(--border); background: var(--panel); color: var(--muted);
-    padding: 0.35rem 0.95rem; border-radius: 999px; font-size: 0.85rem;
-    cursor: pointer; transition: all 0.2s;
-  }
-  .chip:hover, .chip.active { color: #fff; border-color: var(--accent); background: rgba(255, 92, 80, 0.18); }
-
-  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.3rem; perspective: 1200px; }
-  .card {
-    background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
-    padding: 1.4rem; display: flex; flex-direction: column; gap: 0.7rem;
-    text-decoration: none; color: inherit;
-    opacity: 0;
-    transform-style: preserve-3d;
-    transition: transform 0.18s ease, border-color 0.25s, box-shadow 0.25s;
-    will-change: transform, opacity;
-  }
-  .card.dealt { animation: irisIn 0.85s cubic-bezier(0.22, 0.9, 0.26, 1) forwards; }
-  .card.shown { opacity: 1; }
-  .card:hover { border-color: var(--accent); box-shadow: 0 16px 44px rgba(255, 92, 80, 0.22); }
-  @keyframes irisIn {
-    0%   { opacity: 0; transform: translateX(160px) rotate(200deg) scale(0.1); }
-    35%  { opacity: 1; }
-    65%  { transform: translateX(40px) rotate(38deg) scale(0.9); }
-    82%  { transform: translateX(-14px) rotate(-7deg) scale(1.05); }
-    100% { opacity: 1; transform: translateX(0) rotate(0deg) scale(1); }
-  }
-  .card h3 { font-size: 1.1rem; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
-  .card h3 .stars { font-size: 0.85rem; color: var(--muted); font-weight: 400; white-space: nowrap; }
-  .card p { color: var(--muted); font-size: 0.92rem; flex: 1; }
-  .card .meta { display: flex; align-items: center; gap: 1rem; font-size: 0.82rem; color: var(--muted); }
-  .lang-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 0.4rem; vertical-align: -1px; }
-  .card .site-link { color: var(--accent2); font-size: 0.82rem; }
-  .projects-note { color: var(--muted); font-size: 0.85rem; margin-top: 1.4rem; text-align: center; }
-
-  .card-thumb {
-    width: 100%; aspect-ratio: 2 / 1; object-fit: cover;
-    border-radius: 8px; border: 1px solid var(--border); background: #0D0E11;
-    margin-bottom: 0.3rem;
-  }
-
-  .featured-card {
-    display: grid; grid-template-columns: 1.1fr 1fr; gap: 2rem; align-items: center;
-    background: var(--panel); border: 1px solid var(--border); border-radius: 18px;
-    padding: 1.7rem; position: relative; overflow: hidden;
-  }
-  .featured-card::before {
-    content: ''; position: absolute; inset: 0; pointer-events: none;
-    background: radial-gradient(620px circle at 100% 0, rgba(255, 92, 80, 0.14), transparent 60%);
-  }
-  .featured-card img.shot { width: 100%; border-radius: 12px; border: 1px solid var(--border); display: block; }
-  .featured-tag { display: inline-block; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent2); font-weight: 700; margin-bottom: 0.6rem; }
-  .featured-card h3 { font-size: 1.7rem; margin-bottom: 0.6rem; }
-  .featured-card p { color: var(--muted); margin-bottom: 1.2rem; }
-  .featured-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.4rem; }
-  .featured-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; }
-  @media (max-width: 760px) { .featured-card { grid-template-columns: 1fr; } }
-
-  .contact-box {
-    text-align: center; background: var(--panel); border: 1px solid var(--border);
-    border-radius: 18px; padding: 3rem 2rem;
-  }
-  .contact-box p { color: var(--muted); max-width: 480px; margin: 0.6rem auto 1.8rem; }
-  .socials { display: flex; gap: 1.1rem; justify-content: center; }
-  .socials a { display: inline-flex; transition: transform 0.2s; }
-  .socials a:hover { transform: translateY(-4px) scale(1.08); }
-  .socials img { height: 48px; border-radius: 10px; }
-
-  footer {
-    text-align: center; padding: 2.2rem; color: var(--muted); font-size: 0.85rem;
-    border-top: 1px solid var(--border); margin-top: 3rem;
-  }
-  footer .grad-text { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 600; }
-
-  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s, transform 0.7s; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1438c7">
+  <title>Jonah Chang — Robotics & Systems Builder</title>
+  <meta name="description" content="Jonah Chang builds robotics, motion-control, on-screen computer-vision, and web systems—including Odyssey for VEX V5, a traditional robotic arm, and gesture interfaces.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Jonah Chang — Robotics & Systems Builder">
+  <meta property="og:description" content="Software with a sense of direction: robotics, motion control, computer vision, and interactive systems.">
+  <meta property="og:url" content="https://portfolio-five-omega-y8vld3apbj.vercel.app/">
+  <meta property="og:image" content="https://opengraph.githubassets.com/1/jonahchang207/portfolio">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260731-iris3">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231438c7'/%3E%3Cpath d='M5 21h7V11h7v10h8' fill='none' stroke='%23ff5b19' stroke-width='3'/%3E%3C/svg%3E">
 </head>
 <body>
-<canvas id="stars"></canvas>
+  <a class="skip-link" href="#main">Skip to the work</a>
 
-<nav>
-  <span class="logo">JC</span>
-  <span class="links">
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-  </span>
-</nav>
-
-<main>
-  <div class="hero">
-    <h1>Jonah Chang</h1>
-    <div class="typing" id="typing"></div>
-    <div class="cta">
-      <a class="btn btn-primary" href="#projects">View My Work</a>
-      <a class="btn btn-ghost" href="https://github.com/jonahchang207" target="_blank" rel="noopener">GitHub ↗</a>
-    </div>
-    <div class="scroll-hint">▾</div>
-  </div>
-
-  <section id="about" class="reveal">
-    <h2>About</h2>
-    <div class="about-grid">
-      <div>
-        <p>I build things across <strong>Python, data, and AI</strong> — from
-        <strong>robotics</strong> (VEX V5 odometry &amp; motion control, a 6DOF robotic arm with
-        YOLO-based vision) to <strong>gesture-controlled interfaces</strong> and
-        <strong>web apps</strong> in JavaScript and TypeScript.</p>
-        <p>I like projects where software meets the physical world: position tracking,
-        computer vision, motion planning, and the tooling that makes them easier for others to use.</p>
+  <header class="site-header">
+    <nav class="nav-shell" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="Jonah Chang, back to top">
+        <span class="brand-mark" aria-hidden="true">JC</span>
+        <span>Jonah Chang</span>
+      </a>
+      <div class="nav-route" aria-hidden="true">
+        <span></span><i></i><span></span><i></i><span></span>
       </div>
-      <div class="stack-img">
-        <img src="https://skillicons.dev/icons?i=python,sklearn,opencv,js,ts,react,nodejs,cpp,dart,flutter,git,vscode&theme=dark&perline=4" alt="tech stack"/>
+      <div class="nav-links">
+        <a href="#featured">Selected work</a>
+        <a href="#network">Project network</a>
+        <a class="nav-action" href="mailto:saphirredragon207@gmail.com"><span class="nav-action-long">Start a conversation</span><span class="nav-action-short">Contact</span> <span class="nav-action-arrow" aria-hidden="true">↗</span></a>
       </div>
-    </div>
-  </section>
+    </nav>
+  </header>
 
-  <section id="featured" class="reveal">
-    <h2>Featured</h2>
-    <div class="featured-card">
-      <img class="shot" src="https://opengraph.githubassets.com/1/jonahchang207/odyssey" alt="odyssey preview" loading="lazy"/>
-      <div>
-        <span class="featured-tag">◆ Flagship Project</span>
-        <h3>odyssey</h3>
-        <p>An odometry &amp; motion-control template for VEX V5 (PROS): real-time position tracking,
-        PID point &amp; turn motions, a boomerang controller, and pure-pursuit path following — the
-        autonomous-motion stack a whole competition robot is built on.</p>
-        <div class="featured-badges">
-          <img src="https://img.shields.io/github/languages/top/jonahchang207/odyssey?style=flat-square&color=FF5C50&labelColor=16181D" alt="top language"/>
-          <img src="https://img.shields.io/github/stars/jonahchang207/odyssey?style=flat-square&color=FF5C50&labelColor=16181D&logo=github" alt="stars"/>
-          <img src="https://img.shields.io/github/last-commit/jonahchang207/odyssey?style=flat-square&color=FF5C50&labelColor=16181D" alt="last commit"/>
-        </div>
-        <div class="featured-actions">
-          <a class="btn btn-primary" href="https://github.com/jonahchang207/odyssey" target="_blank" rel="noopener">View Repo ↗</a>
-          <a class="btn btn-ghost" href="https://jonahchang207.github.io/odyssey/" target="_blank" rel="noopener">Live Docs ↗</a>
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-legend" aria-hidden="true">
+        <strong>Control atlas</strong>
+        <span><i class="legend-node"></i> Destination</span>
+        <span><i class="legend-route"></i> Active route</span>
+        <span><i class="legend-plan"></i> Planned path</span>
+      </div>
+
+      <div class="hero-copy">
+        <p class="hero-context">Robotics · systems engineering · software</p>
+        <h1 id="hero-title">
+          <span class="hero-title-line">I build <span class="inline-work" aria-hidden="true"><img src="assets/thumbnails/odyssey-sim.png" alt=""></span> systems</span>
+          <span class="hero-title-line">that move.</span>
+        </h1>
+        <p class="hero-intro">From sensor input to controlled motion—position tracking, computer vision, physical machines, and the interfaces that make them usable.</p>
+        <div class="hero-actions" aria-label="Primary actions">
+          <a class="button button-primary" href="#featured">Explore the work <span aria-hidden="true">↓</span></a>
+          <a class="button button-secondary" href="https://github.com/jonahchang207" target="_blank" rel="noopener noreferrer">Open GitHub <span aria-hidden="true">↗</span></a>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section id="projects" class="reveal">
-    <h2>Projects</h2>
-    <div class="filter-row" id="filters"></div>
-    <div class="projects-grid" id="grid"></div>
-    <p class="projects-note">Cards load live from the GitHub API — always up to date.</p>
-  </section>
-
-  <section id="contact" class="reveal">
-    <div class="contact-box">
-      <h2 style="justify-content:center">Get In Touch</h2>
-      <p>Want to collaborate, ask about a project, or just say hi? My inbox is open.</p>
-      <div class="socials">
-        <a href="mailto:saphirredragon207@gmail.com" title="Email"><img src="https://skillicons.dev/icons?i=gmail" alt="email"/></a>
-        <a href="https://github.com/jonahchang207" target="_blank" rel="noopener" title="GitHub"><img src="https://skillicons.dev/icons?i=github&theme=dark" alt="github"/></a>
-        <a href="https://www.linkedin.com/in/YOUR_LINKEDIN" target="_blank" rel="noopener" title="LinkedIn"><img src="https://skillicons.dev/icons?i=linkedin" alt="linkedin"/></a>
+      <div class="hero-route" aria-hidden="true">
+        <svg viewBox="0 0 1600 460" preserveAspectRatio="none">
+          <path class="route-plan" d="M-40 330 C170 210 230 390 420 262 S720 76 850 258 S1140 402 1280 252 S1500 116 1640 210"/>
+          <path id="heroRoute" class="route-live" pathLength="1" d="M-40 330 C170 210 230 390 420 262 S720 76 850 258 S1140 402 1280 252 S1500 116 1640 210"/>
+          <g class="route-nodes">
+            <circle cx="420" cy="262" r="11"/><circle cx="850" cy="258" r="11"/><circle cx="1280" cy="252" r="11"/>
+          </g>
+        </svg>
       </div>
-    </div>
-  </section>
-</main>
 
-<footer>
-  <span class="grad-text">Jonah Chang</span> · built by hand, deployed on Vercel
-</footer>
+      <div class="hero-flow" aria-label="How the systems work">
+        <span>Sense</span><i></i><span>Estimate</span><i></i><span>Control</span><i></i><span>Move</span>
+      </div>
+    </section>
 
-<script>
-/* ---------- starfield ---------- */
-const canvas = document.getElementById('stars');
-const ctx = canvas.getContext('2d');
-let stars = [];
-function initStars() {
-  canvas.width = innerWidth;
-  canvas.height = innerHeight;
-  stars = Array.from({ length: Math.min(140, innerWidth / 8) }, () => ({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    r: Math.random() * 1.4 + 0.3,
-    speed: Math.random() * 0.25 + 0.05,
-    phase: Math.random() * Math.PI * 2,
-  }));
-}
-function drawStars(t) {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for (const s of stars) {
-    const alpha = 0.35 + 0.5 * Math.abs(Math.sin(t / 1400 + s.phase));
-    ctx.fillStyle = `rgba(210, 214, 224, ${alpha})`;
-    ctx.beginPath();
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-    ctx.fill();
-    s.y -= s.speed;
-    if (s.y < -2) { s.y = canvas.height + 2; s.x = Math.random() * canvas.width; }
-  }
-  requestAnimationFrame(drawStars);
-}
-initStars();
-addEventListener('resize', initStars);
-requestAnimationFrame(drawStars);
+    <section class="manifesto" aria-labelledby="manifesto-title">
+      <div class="manifesto-pin">
+        <p class="route-kicker">The through-line</p>
+        <div class="mini-route" aria-hidden="true"><i></i><i></i><i></i></div>
+      </div>
+      <p class="manifesto-copy" id="manifesto-title">I turn real-world input into intentional motion—across robots, vision systems, simulations, and interfaces built to make complex behavior feel clear.</p>
+    </section>
 
-/* ---------- typing rotator ---------- */
-const phrases = [
-  'Python · Data · AI',
-  'Robotics & motion control',
-  'Computer vision projects',
-  'Web development with JS / TS',
-];
-const typingEl = document.getElementById('typing');
-let pi = 0, ci = 0, deleting = false;
-function typeTick() {
-  const phrase = phrases[pi];
-  typingEl.textContent = phrase.slice(0, ci);
-  let delay = deleting ? 35 : 70;
-  if (!deleting && ci === phrase.length) { deleting = true; delay = 1800; }
-  else if (deleting && ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; delay = 350; }
-  else ci += deleting ? -1 : 1;
-  setTimeout(typeTick, delay);
-}
-typeTick();
+    <section class="featured section-pad" id="featured" aria-labelledby="featured-title">
+      <div class="section-heading">
+        <h2 id="featured-title">IRIS leads<br>the work.</h2>
+        <p>IRIS is the central robotics build: a traditional articulated arm. Odyssey and Handwave carry the same control thinking into autonomous motion and human input.</p>
+      </div>
 
-/* ---------- scroll reveal ---------- */
-const observer = new IntersectionObserver(
-  (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add('visible')),
-  { threshold: 0.12 }
-);
-document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+      <div class="bento-grid">
+        <article class="feature feature-iris">
+          <div class="feature-media">
+          </div>
+          <div class="feature-copy">
+            <div>
+              <p class="project-type">Featured robotics build · joint control</p>
+              <h3>IRIS</h3>
+            </div>
+            <div class="feature-summary">
+              <p>My traditional articulated robot arm, built to coordinate its joints for reaching, positioning, and physical manipulation.</p>
+              <span class="feature-focus">Traditional arm · physical control</span>
+            </div>
+          </div>
+        </article>
 
-/* ---------- card deal / waterfall + cursor tilt ---------- */
-const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-let gridInView = false;
+        <a class="feature feature-small feature-odyssey" href="https://github.com/jonahchang207/odyssey" target="_blank" rel="noopener noreferrer">
+          <div class="feature-media">
+            <img class="media-contain" src="assets/thumbnails/odyssey-banner.svg" alt="Odyssey repository banner">
+            <div class="plot-overlay" aria-hidden="true">
+              <svg viewBox="0 0 620 310"><path d="M30 245C130 122 214 284 310 174S470 52 590 122"/><circle cx="310" cy="174" r="8"/><circle cx="590" cy="122" r="8"/></svg>
+            </div>
+          </div>
+          <div class="feature-copy">
+            <p class="project-type">VEX V5 · C++ · PROS</p>
+            <h3>Odyssey</h3>
+            <p>Position-aware autonomous motion for a VEX robot.</p>
+            <span class="text-link">View repository <b aria-hidden="true">↗</b></span>
+          </div>
+        </a>
 
-function dealCards() {
-  document.querySelectorAll('#grid .card').forEach((c, i) => {
-    if (reduce) { c.classList.add('shown'); return; }
-    c.classList.remove('dealt', 'shown');
-    c.style.transform = '';
-    void c.offsetWidth;                       // restart the animation
-    c.style.animationDelay = (i * 55) + 'ms'; // staggered cascade
-    c.classList.add('dealt');
-  });
-}
+        <a class="feature feature-small feature-handwave" href="https://github.com/jonahchang207/handwave" target="_blank" rel="noopener noreferrer">
+          <div class="feature-media">
+            <img src="assets/thumbnails/handwave-input.jpg" alt="Open palm, the gesture Handwave uses to begin controlling the cursor">
+          </div>
+          <div class="feature-copy">
+            <p class="project-type">MediaPipe · Python</p>
+            <h3>Handwave</h3>
+            <p>Pinches and swipes become Mac cursor controls.</p>
+            <span class="text-link">View repository <b aria-hidden="true">↗</b></span>
+          </div>
+        </a>
+      </div>
+    </section>
 
-function wireCard(card) {
-  if (reduce) { card.classList.add('shown'); return; }
-  card.addEventListener('animationend', () => {
-    card.classList.remove('dealt');
-    card.classList.add('shown');
-  });
-  card.addEventListener('mousemove', (e) => {
-    if (!card.classList.contains('shown')) return;
-    const b = card.getBoundingClientRect();
-    const px = (e.clientX - b.left) / b.width - 0.5;
-    const py = (e.clientY - b.top) / b.height - 0.5;
-    card.style.transform = `rotateY(${px * 9}deg) rotateX(${-py * 9}deg) translateY(-4px) scale(1.02)`;
-  });
-  card.addEventListener('mouseleave', () => { card.style.transform = ''; });
-}
+    <section class="systems section-pad" aria-labelledby="systems-title">
+      <div class="systems-heading">
+        <p class="route-kicker">Choose a route</p>
+        <h2 id="systems-title">The work crosses disciplines.</h2>
+        <p>The same systems instinct travels from low-level control to interfaces and simulation.</p>
+      </div>
 
-const gridObserver = new IntersectionObserver((entries) => {
-  if (entries.some((e) => e.isIntersecting)) {
-    gridInView = true;
-    dealCards();
-    gridObserver.disconnect();
-  }
-}, { threshold: 0.08 });
-gridObserver.observe(document.getElementById('grid'));
+      <div class="system-accordion" data-accordion>
+        <article class="system-panel is-active" data-panel>
+          <button class="system-trigger" type="button" aria-expanded="true" aria-controls="motion-detail">
+            <span>Motion</span><small>Odometry, PID, path following</small>
+          </button>
+          <div class="system-detail" id="motion-detail">
+            <h3>Make motion repeatable.</h3>
+            <p>Track position, plan a path, correct error, and expose the controls clearly enough to tune.</p>
+            <a href="https://jonahchang207.github.io/odyssey/" target="_blank" rel="noopener noreferrer">Read Odyssey docs <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+        <article class="system-panel" data-panel>
+          <button class="system-trigger" type="button" aria-expanded="false" aria-controls="vision-detail">
+            <span>Vision</span><small>Detection, tracking, perception</small>
+          </button>
+          <div class="system-detail" id="vision-detail">
+            <h3>Computer vision, directly on screen.</h3>
+            <p>FrameSight watches a Windows display, runs YOLO detection in real time, and draws what it finds in a transparent click-through overlay.</p>
+            <a href="https://github.com/jonahchang207/FrameSight" target="_blank" rel="noopener noreferrer">Open FrameSight <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+        <article class="system-panel" data-panel>
+          <button class="system-trigger" type="button" aria-expanded="false" aria-controls="interfaces-detail">
+            <span>Interfaces</span><small>Web, mobile, human input</small>
+          </button>
+          <div class="system-detail" id="interfaces-detail">
+            <h3>Make complexity approachable.</h3>
+            <p>VEXVortex keeps competition information and robot analysis together, so the useful details are easier to reach between matches.</p>
+            <span class="system-project-name">VEXVortex</span>
+          </div>
+        </article>
+        <article class="system-panel" data-panel>
+          <button class="system-trigger" type="button" aria-expanded="false" aria-controls="worlds-detail">
+            <span>Worlds</span><small>Simulation, games, networks</small>
+          </button>
+          <div class="system-detail" id="worlds-detail">
+            <h3>Test systems by letting them run.</h3>
+            <p>Odyssey Simulator lets me write autonomous routines, watch them run on a virtual VEX field, and copy the generated C++ back to the robot.</p>
+            <a href="https://github.com/jonahchang207/odyssey-sim" target="_blank" rel="noopener noreferrer">Open Odyssey Simulator <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+      </div>
+    </section>
 
-/* ---------- projects (live from GitHub, with baked-in fallback) ---------- */
-const LANG_COLORS = {
-  Python: '#3572A5', 'C++': '#f34b7d', TypeScript: '#3178c6', JavaScript: '#f1e05a',
-  Dart: '#00B4AB', HTML: '#e34c26', CSS: '#563d7c', Rust: '#dea584',
-  'C#': '#178600', 'Jupyter Notebook': '#DA5B0B', MDX: '#fcb32c',
-};
-const FEATURED_ORDER = [
-  'odyssey', 'odyssey-sim', 'IRIS-Progect', 'handwave', 'Vortex',
-  'FrameSight', 'O.R.B.I.T', 'Harbor', 'AetherWeave_Network_Tycoon',
-];
-const FALLBACK = [
-  { name: 'odyssey', description: 'Odometry & motion control template for VEX V5 (PROS) — position tracking, PID motions, boomerang, pure pursuit', language: 'C++', stargazers_count: 0, html_url: 'https://github.com/jonahchang207/odyssey', homepage: 'https://jonahchang207.github.io/odyssey/' },
-  { name: 'odyssey-sim', description: 'Browser-based simulator for the Odyssey VEX V5 odometry & motion control library', language: 'TypeScript', stargazers_count: 0, html_url: 'https://github.com/jonahchang207/odyssey-sim', homepage: '' },
-  { name: 'IRIS-Progect', description: '6DOF 3D-printed robotic arm with YOLOv11 screw detection, analytical IK, and Teensy 4.1 stepper control', language: 'Jupyter Notebook', stargazers_count: 0, html_url: 'https://github.com/jonahchang207/IRIS-Progect', homepage: '' },
-  { name: 'handwave', description: 'Control your Mac with hand gestures through the webcam — MediaPipe hand tracking turned into mouse, scroll, and desktop-switching actions', language: 'Python', stargazers_count: 0, html_url: 'https://github.com/jonahchang207/handwave', homepage: '' },
-  { name: 'Vortex', description: 'VEX Robotics companion iOS app — Flutter + Supabase, Liquid Glass UI, OPR/TrueSkill analytics', language: 'Dart', stargazers_count: 0, html_url: 'https://github.com/jonahchang207/Vortex', homepage: '' },
-  { name: 'FrameSight', description: 'Computer vision project in Python', language: 'Python', stargazers_count: 1, html_url: 'https://github.com/jonahchang207/FrameSight', homepage: '' },
-  { name: 'O.R.B.I.T', description: 'Azynt research notes and local file reader', language: 'HTML', stargazers_count: 0, html_url: 'https://github.com/jonahchang207/O.R.B.I.T', homepage: 'https://azynt.vercel.app' },
-  { name: 'Harbor', description: 'Local web app to download and convert YouTube videos', language: 'C#', stargazers_count: 0, html_url: 'https://github.com/jonahchang207/Harbor', homepage: '' },
-  { name: 'AetherWeave_Network_Tycoon', description: 'AetherWeave: The Loom of Connectivity — ISP network tycoon (Unity + Rust)', language: 'Rust', stargazers_count: 0, html_url: 'https://github.com/jonahchang207/AetherWeave_Network_Tycoon', homepage: '' },
-];
+    <section class="network section-pad" id="network" aria-labelledby="network-title">
+      <div class="network-layout">
+        <div class="network-copy" data-pin>
+          <p class="route-kicker">The project network</p>
+          <h2 id="network-title">More places the route goes.</h2>
+          <p>Each card explains what the project actually does and uses real repository media whenever the project provides it.</p>
+          <div class="carousel-controls">
+            <button class="round-control" id="prevProject" type="button" aria-label="Previous project">←</button>
+            <button class="round-control" id="nextProject" type="button" aria-label="Next project">→</button>
+            <span id="projectStatus" role="status" aria-live="polite">Showing selected projects</span>
+          </div>
+        </div>
 
-let allRepos = [];
-let activeLang = 'All';
+        <div class="project-viewport">
+          <div class="project-track" id="projectTrack">
+            <article class="project-card project-card-iris">
+              <div class="project-card-media project-fallback-iris" aria-hidden="true"></div>
+              <div class="project-card-copy"><span class="project-meta">Robotics · joint control</span><h3>IRIS</h3><p>My traditional articulated robot arm, built to coordinate its joints for reaching, positioning, and physical manipulation.</p><span class="project-note">Featured private project</span></div>
+            </article>
+            <a class="project-card" href="https://github.com/jonahchang207/odyssey" target="_blank" rel="noopener noreferrer">
+              <div class="project-card-media"><img class="media-contain" src="assets/thumbnails/odyssey-banner.svg" alt="Odyssey repository banner" loading="lazy"></div>
+              <div class="project-card-copy"><span class="project-meta">C++ · PROS</span><h3>Odyssey</h3><p>Helps a VEX robot track its position and drive precise autonomous routes with PID, move-to-pose, and pure pursuit.</p><span class="text-link">Open repository <b aria-hidden="true">↗</b></span></div>
+            </a>
+            <a class="project-card" href="https://github.com/jonahchang207/odyssey-sim" target="_blank" rel="noopener noreferrer">
+              <div class="project-card-media"><img src="assets/thumbnails/odyssey-sim.png" alt="Odyssey Simulator path planner running on a virtual VEX field" loading="lazy"></div>
+              <div class="project-card-copy"><span class="project-meta">TypeScript · simulation</span><h3>Odyssey Simulator</h3><p>Write an autonomous routine in the browser, watch it run on a virtual field, then copy the generated C++ back to the robot.</p><span class="text-link">Open repository <b aria-hidden="true">↗</b></span></div>
+            </a>
+            <a class="project-card" href="https://github.com/jonahchang207/handwave" target="_blank" rel="noopener noreferrer">
+              <div class="project-card-media"><img src="assets/thumbnails/handwave-input.jpg" alt="Open palm, the gesture Handwave uses to begin controlling the cursor" loading="lazy"></div>
+              <div class="project-card-copy"><span class="project-meta">Python · MediaPipe</span><h3>Handwave</h3><p>Raise your hand to control a Mac; pinches and swipes become cursor movement, clicks, scrolling, dragging, and desktop switching.</p><span class="text-link">Open repository <b aria-hidden="true">↗</b></span></div>
+            </a>
+            <article class="project-card">
+              <div class="project-card-media project-fallback-vexvortex" aria-hidden="true"></div>
+              <div class="project-card-copy"><span class="project-meta">VEX Robotics · interface</span><h3>VEXVortex</h3><p>Keeps competition information and robot analysis together, so the useful details are easier to reach between matches.</p><span class="project-note">Private project</span></div>
+            </article>
+            <a class="project-card" href="https://github.com/jonahchang207/FrameSight" target="_blank" rel="noopener noreferrer">
+              <div class="project-card-media"><img src="assets/thumbnails/framesight-overlay.svg" alt="Annotated FrameSight overlay with detections, guide lines, and magnifier" loading="lazy"></div>
+              <div class="project-card-copy"><span class="project-meta">Python · YOLO11n</span><h3>FrameSight</h3><p>Watches a Windows screen, runs YOLO detection in real time, and draws the results in a transparent click-through overlay.</p><span class="text-link">Open repository <b aria-hidden="true">↗</b></span></div>
+            </a>
+            <a class="project-card" href="https://github.com/jonahchang207/O.R.B.I.T" target="_blank" rel="noopener noreferrer">
+              <div class="project-card-media"><img src="assets/thumbnails/orbit-reader.png" alt="O.R.B.I.T research reader showing perception notes and project documents" loading="lazy"></div>
+              <div class="project-card-copy"><span class="project-meta">Python · stereo vision</span><h3>O.R.B.I.T</h3><p>A low-cost 360° perception project combining stereo cameras, YOLO, ranging, bearing, and persistent target tracking.</p><span class="text-link">Open repository <b aria-hidden="true">↗</b></span></div>
+            </a>
+            <a class="project-card" href="https://github.com/jonahchang207/Harbor" target="_blank" rel="noopener noreferrer">
+              <div class="project-card-media"><img src="assets/thumbnails/harbor.png" alt="Harbor interface with URL, file type, quality, and convert controls" loading="lazy"></div>
+              <div class="project-card-copy"><span class="project-meta">C# · .NET</span><h3>Harbor</h3><p>Paste a YouTube link, choose a format and quality, and Harbor downloads and converts the file locally.</p><span class="text-link">Open repository <b aria-hidden="true">↗</b></span></div>
+            </a>
+            <a class="project-card" href="https://github.com/jonahchang207/56S-Override" target="_blank" rel="noopener noreferrer">
+              <div class="project-card-media project-fallback-56s" aria-hidden="true"></div>
+              <div class="project-card-copy"><span class="project-meta">C++ · PROS</span><h3>56S Override</h3><p>The competition code for VEX team 56S: autonomous movement, driver control, and a state-based intake coordinating motors and pneumatics.</p><span class="text-link">Open repository <b aria-hidden="true">↗</b></span></div>
+            </a>
+            <noscript>
+              <p class="noscript-note">Browse the full project list on <a href="https://github.com/jonahchang207">Jonah’s GitHub profile</a>.</p>
+            </noscript>
+          </div>
+        </div>
+      </div>
+    </section>
 
-function render() {
-  const grid = document.getElementById('grid');
-  grid.innerHTML = '';
-  const repos = allRepos.filter((r) => r.name !== 'odyssey' && (activeLang === 'All' || r.language === activeLang));
-  for (const r of repos) {
-    const card = document.createElement('a');
-    card.className = 'card';
-    card.href = r.html_url;
-    card.target = '_blank';
-    card.rel = 'noopener';
-    const dot = `<span class="lang-dot" style="background:${LANG_COLORS[r.language] || '#FF5C50'}"></span>`;
-    card.innerHTML = `
-      <img class="card-thumb" src="https://opengraph.githubassets.com/1/jonahchang207/${r.name}" alt="${r.name} preview" loading="lazy"/>
-      <h3>${r.name.replace(/[_-]/g, ' ')} <span class="stars">★ ${r.stargazers_count}</span></h3>
-      <p>${r.description || 'No description yet.'}</p>
-      <div class="meta">
-        ${r.language ? `<span>${dot}${r.language}</span>` : ''}
-        ${r.homepage ? `<span class="site-link">live site ↗</span>` : ''}
-      </div>`;
-    grid.appendChild(card);
-    wireCard(card);
-  }
-  if (gridInView) dealCards();  // re-shuffle on filter change
-}
+    <section class="about section-pad" id="about" aria-labelledby="about-title">
+      <div class="about-route" aria-hidden="true">
+        <span></span><i></i><span></span><i></i><span></span>
+      </div>
+      <div class="about-heading">
+        <p class="route-kicker">Behind the systems</p>
+        <h2 id="about-title">Builder, coder, designer.</h2>
+      </div>
+      <div class="about-copy">
+        <p>I’m Jonah, a high school student pursuing robotics and systems engineering. I’m the main coder for VEX V5 team 56S and its primary CAD designer.</p>
+        <p>I’m most interested in the seam between software and the physical world: position tracking, perception, motion planning, and the tools that make those systems easier for other people to understand and use.</p>
+        <a class="text-link text-link-dark" href="https://github.com/jonahchang207" target="_blank" rel="noopener noreferrer">See how I build on GitHub <b aria-hidden="true">↗</b></a>
+      </div>
+    </section>
 
-function renderFilters() {
-  const langs = ['All', ...new Set(allRepos.map((r) => r.language).filter(Boolean))];
-  const row = document.getElementById('filters');
-  row.innerHTML = '';
-  for (const l of langs) {
-    const chip = document.createElement('button');
-    chip.className = 'chip' + (l === activeLang ? ' active' : '');
-    chip.textContent = l;
-    chip.onclick = () => { activeLang = l; renderFilters(); render(); };
-    row.appendChild(chip);
-  }
-}
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="contact-route" aria-hidden="true">
+        <svg viewBox="0 0 800 280" preserveAspectRatio="none"><path d="M-20 215C135 34 245 245 405 118S690 44 830 152"/><circle cx="405" cy="118" r="11"/></svg>
+      </div>
+      <p class="route-kicker">Next destination</p>
+      <h2 id="contact-title">Let’s build the next system.</h2>
+      <p>For engineering opportunities, collaboration, or questions about the work, the route starts here.</p>
+      <div class="contact-actions">
+        <a class="button button-ink" href="mailto:saphirredragon207@gmail.com">Send an email <span aria-hidden="true">↗</span></a>
+        <a class="button button-orange-ghost" href="https://github.com/jonahchang207" target="_blank" rel="noopener noreferrer">Follow on GitHub <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+  </main>
 
-function sortRepos(repos) {
-  return repos
-    .filter((r) => !r.fork && r.name !== 'jonahchang207' && r.name !== 'docs' && r.description)
-    .sort((a, b) => {
-      const ai = FEATURED_ORDER.indexOf(a.name), bi = FEATURED_ORDER.indexOf(b.name);
-      if (ai !== -1 || bi !== -1) return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
-      return new Date(b.pushed_at || 0) - new Date(a.pushed_at || 0);
-    });
-}
+  <footer>
+    <a href="#top">Jonah Chang</a>
+    <p>Robotics · systems engineering · software</p>
+    <p>© <span id="year">2026</span> · Built with intent</p>
+  </footer>
 
-fetch('https://api.github.com/users/jonahchang207/repos?per_page=100')
-  .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
-  .then((repos) => { allRepos = sortRepos(repos); renderFilters(); render(); })
-  .catch(() => { allRepos = FALLBACK; renderFilters(); render(); });
-</script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+  <script src="script.js?v=20260731-iris3" defer></script>
 </body>
 </html>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="FrameSight on-screen vision overlay diagram">
+  <rect width="1200" height="630" fill="#0c258d"/>
+  <rect x="70" y="88" width="1060" height="470" fill="#1438c7" stroke="#dce4ff" stroke-width="8"/>
+  <g fill="none" stroke="#ff5b19" stroke-width="10"><rect x="190" y="185" width="245" height="218"/><rect x="710" y="155" width="286" height="265"/><path d="M600 88v470M70 323h1060"/></g>
+  <g fill="#f5f3ec"><circle cx="600" cy="323" r="18"/><circle cx="312" cy="294" r="12"/><circle cx="853" cy="288" r="12"/></g>
+  <g fill="#dce4ff" font-family="monospace"><text x="95" y="70" font-size="28">SCREEN CAPTURE / YOLO11N</text><text x="195" y="440" font-size="22">DETECTION OVERLAY</text><text x="715" y="457" font-size="22">ON-SCREEN VISION</text></g>
+</svg>

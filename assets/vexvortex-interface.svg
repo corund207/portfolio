@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="VEXVortex companion interface diagram">
+  <rect width="1200" height="630" fill="#1438c7"/>
+  <rect x="360" y="58" width="480" height="514" rx="34" fill="#f5f3ec" stroke="#121212" stroke-width="12"/>
+  <rect x="402" y="118" width="396" height="88" fill="#ff5b19"/>
+  <g fill="#0c258d"><rect x="402" y="238" width="180" height="128"/><rect x="618" y="238" width="180" height="128"/><rect x="402" y="398" width="396" height="116"/></g>
+  <g fill="#121212" font-family="monospace"><text x="55" y="70" font-size="28">VEX COMPANION</text><text x="430" y="173" font-size="34">VEXVORTEX</text></g>
+  <g fill="#dce4ff" font-family="monospace" font-size="22"><text x="430" y="310">MATCH DATA</text><text x="646" y="310">ANALYSIS</text><text x="455" y="466">ROBOTICS INFORMATION</text></g>
+</svg>
