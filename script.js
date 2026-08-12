@@ -1,7 +1,16 @@
-document.documentElement.classList.remove("no-js");
+﻿document.documentElement.classList.remove("no-js");
 document.documentElement.classList.add("js");
 
 const PROJECTS = [
+  {
+    name: "shufflenet-overlay",
+    display_name: "ShuffleNet Overlay",
+    description: "A click-through Windows overlay that captures the screen, detects and tracks people with YOLO and ONNX, and can steer a virtual mouse toward a selected target.",
+    language: "Python",
+    html_url: "https://github.com/jonahchang207/shufflenet-overlay",
+    homepage: "",
+    stargazers_count: 0
+  },
   {
     name: "odyssey",
     description: "Odyssey helps a VEX V5 robot keep track of where it is, then uses that position to drive precise autonomous routes with PID, move-to-pose, and pure pursuit.",
@@ -27,7 +36,7 @@ const PROJECTS = [
   },
   {
     name: "IRIS",
-    description: "IRIS is my traditional articulated robot arm—a hands-on project for coordinating joints so the arm can reach, position, and manipulate objects.",
+    description: "I am building IRIS to coordinate several joints and place its arm where I ask it to go.",
     language: "Robotics",
     html_url: "",
     homepage: "",
@@ -335,3 +344,111 @@ setupAccordion();
 window.addEventListener("load", setupMotion, { once: true });
 loadLiveProjects();
 document.querySelector("#year").textContent = String(new Date().getFullYear());
+
+const CASE_STUDIES = {
+  shufflenet: {
+    eyebrow: "Computer vision · Python · DirectML",
+    title: "ShuffleNet Overlay",
+    lead: "A transparent Windows overlay that detects people on screen, keeps their boxes stable, and can steer a virtual mouse toward a target.",
+    challenge: "The overlay needs fresh detections without making boxes flicker or letting old frames pile up. It also has to stay click-through so the Windows apps underneath remain usable.",
+    system: "Three threads handle capture, ONNX inference, and drawing. Bounded queues drop stale frames, an IoU tracker smooths detections, and DirectML runs the model on the Radeon GPU.",
+    learned: "The model is only one part of a responsive vision tool. Queue depth, coordinate mapping, smoothing, and the mouse safety rules have just as much effect on how it feels.",
+    facts: [["Pipeline","Capture → inference → overlay"],["Vision","YOLO26 + ONNX"],["Runtime","DirectML GPU"],["Interface","PyQt5 + virtual mouse"]],
+    media: "", link: "https://github.com/jonahchang207/shufflenet-overlay"
+  },
+  iris: {
+    eyebrow: "Flagship build · robotics · joint control",
+    title: "IRIS",
+    lead: "A traditional articulated arm that I am building to coordinate several joints and place its end effector where I ask it to go.",
+    challenge: "An arm does not move as one machine. Every joint has its own range, load, and error, yet all of them must arrive together to place the end effector where it belongs.",
+    system: "IRIS combines the mechanical design with the control loop. The software translates a target into joint movement, checks the error, and gives me enough information to tune it.",
+    learned: "Hardware exposes bad assumptions quickly. IRIS has made me think more carefully about calibration, joint limits, feedback, and how the mechanical design affects the control code.",
+    facts: [["Role","Mechanical + controls"],["Focus","Coordinated joints"],["Status","Active build"],["Next","Demo footage + build log"]],
+    media: "assets/iris-kinematics.svg", link: ""
+  },
+  odyssey: {
+    eyebrow: "VEX V5 · C++ · PROS",
+    title: "Odyssey",
+    lead: "A C++ motion library that lets my competition robot track its position and correct its path while driving.",
+    challenge: "Timed autonomous routines break when the robot slips or starts from a slightly different position. Odyssey continually estimates position and corrects the route while the robot drives.",
+    system: "Odyssey combines odometry, PID, move-to-pose, and pure pursuit into a practical control stack built for VEX competition code and fast iteration.",
+    learned: "Controller math was not enough by itself. The odometry, coordinate conventions, and tuning tools decided whether the robot actually drove well.",
+    facts: [["Language","C++"],["Platform","VEX V5 / PROS"],["Systems","Odometry + PID"],["Output","Reusable motion library"]],
+    media: "assets/thumbnails/odyssey-sim.png", link: "https://github.com/jonahchang207/odyssey"
+  },
+  handwave: {
+    eyebrow: "Computer vision · Python · MediaPipe",
+    title: "Handwave",
+    lead: "A gesture interface that turns an open hand, pinches, and swipes into natural Mac cursor controls.",
+    challenge: "A useful gesture interface has to distinguish intent from ordinary movement while staying responsive enough to feel direct, not like operating a cursor through a delay.",
+    system: "Hand landmarks become a small vocabulary of interaction: movement, click, scroll, drag, and desktop switching, with state logic to keep gestures from firing accidentally.",
+    learned: "Human input is noisy and personal. The useful work was in the thresholds, smoothing, and feedback, not just the landmark model.",
+    facts: [["Language","Python"],["Vision","MediaPipe"],["Input","Webcam landmarks"],["Output","Native cursor control"]],
+    media: "assets/thumbnails/handwave-input.jpg", link: "https://github.com/jonahchang207/handwave"
+  }
+};
+
+function setupProjectDialog() {
+  const dialog = document.querySelector("#projectDialog");
+  if (!dialog) return;
+  const close = dialog.querySelector(".dialog-close");
+  const open = (key) => {
+    const project = CASE_STUDIES[key];
+    if (!project) return;
+    dialog.querySelector("#dialogEyebrow").textContent = project.eyebrow;
+    dialog.querySelector("#dialogTitle").textContent = project.title;
+    dialog.querySelector("#dialogLead").textContent = project.lead;
+    dialog.querySelector("#dialogChallenge").textContent = project.challenge;
+    dialog.querySelector("#dialogSystem").textContent = project.system;
+    dialog.querySelector("#dialogLearned").textContent = project.learned;
+    dialog.querySelector("#dialogFacts").innerHTML = project.facts.map(([label,value]) => `<div class="dialog-fact"><span>${label}</span><strong>${value}</strong></div>`).join("");
+    dialog.querySelector("#dialogMedia").innerHTML = project.media ? `<img src="${project.media}" alt="${project.title} project visual">` : `<div class="dialog-live-preview"><div class="detection-box box-one"><span>PERSON 01 · TRACKED</span></div><div class="detection-box box-two"><span>PERSON 02 · TRACKED</span></div><div class="overlay-crosshair" aria-hidden="true"></div><div class="overlay-hud"><span>CAPTURE</span><span>DETECT</span><span>TRACK</span></div></div>`;
+    const link = dialog.querySelector("#dialogLink");
+    link.hidden = !project.link;
+    if (project.link) link.href = project.link;
+    dialog.showModal();
+    document.body.style.overflow = "hidden";
+    dialog.scrollTop = 0;
+  };
+  document.querySelectorAll("[data-open-project]").forEach(button => button.addEventListener("click", event => { event.stopPropagation(); open(button.dataset.openProject); }));
+  document.querySelectorAll(".feature[data-project]").forEach(card => {
+    card.addEventListener("click", () => open(card.dataset.project));
+    card.addEventListener("keydown", event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); open(card.dataset.project); } });
+  });
+  const shut = () => { dialog.close(); document.body.style.overflow = ""; };
+  close.addEventListener("click", shut);
+  dialog.addEventListener("click", event => { if (event.target === dialog) shut(); });
+  dialog.addEventListener("close", () => { document.body.style.overflow = ""; });
+  dialog.addEventListener("scroll", () => {
+    const max = dialog.scrollHeight - dialog.clientHeight;
+    dialog.querySelector(".dialog-progress i").style.width = `${max ? (dialog.scrollTop / max) * 100 : 0}%`;
+  }, { passive: true });
+}
+
+function setupDelight() {
+  const loader = document.querySelector(".page-loader");
+  window.setTimeout(() => loader?.classList.add("is-gone"), reducedMotion ? 0 : 1250);
+
+  const cursor = document.querySelector(".cursor-orbit");
+  if (cursor && matchMedia("(pointer:fine)").matches && !reducedMotion) {
+    let x = innerWidth / 2, y = innerHeight / 2, tx = x, ty = y;
+    addEventListener("pointermove", e => { tx = e.clientX; ty = e.clientY; }, { passive: true });
+    const follow = () => { x += (tx-x)*.16; y += (ty-y)*.16; cursor.style.left=x+"px"; cursor.style.top=y+"px"; requestAnimationFrame(follow); }; follow();
+    document.querySelectorAll("a,button,.feature").forEach(el => {
+      el.addEventListener("mouseenter", () => cursor.classList.add("is-active"));
+      el.addEventListener("mouseleave", () => cursor.classList.remove("is-active"));
+    });
+  }
+
+  if (!reducedMotion && window.gsap && window.ScrollTrigger) {
+    document.querySelectorAll(".section-heading,.systems-heading,.network-copy,.about-heading,.about-copy,.contact>h2,.project-card").forEach(el => el.classList.add("reveal-item"));
+    window.gsap.utils.toArray(".reveal-item").forEach(el => window.gsap.to(el,{opacity:1,y:0,rotate:0,duration:1.05,ease:"power3.out",scrollTrigger:{trigger:el,start:"top 88%",once:true}}));
+    window.gsap.to(".kinetic-strip div",{xPercent:-18,ease:"none",scrollTrigger:{trigger:".kinetic-strip",start:"top bottom",end:"bottom top",scrub:1}});
+    window.gsap.to("[data-parallax]",{yPercent:22,ease:"none",scrollTrigger:{trigger:".hero",start:"top top",end:"bottom top",scrub:true}});
+    window.gsap.utils.toArray(".feature").forEach((card,index) => window.gsap.from(card,{y:120,rotate:index%2?2:-2,opacity:0,duration:1.1,ease:"power3.out",scrollTrigger:{trigger:card,start:"top 90%"}}));
+  }
+}
+
+setupProjectDialog();
+window.addEventListener("load", setupDelight, { once: true });
+
