@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --cobalt: #1438c7;
   --cobalt-deep: #0c258d;
   --cobalt-mist: #dce4ff;
@@ -9,8 +9,8 @@
   --ink: #121212;
   --line: rgba(18, 18, 18, 0.28);
   --line-light: rgba(255, 255, 255, 0.35);
-  --font-display: "Cabinet Grotesk", "Arial Black", Arial, sans-serif;
-  --font-mono: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
+  --font-display: "JetBrainsMono Nerd Font Mono", "JetBrains Mono", monospace;
+  --font-mono: "JetBrainsMono Nerd Font Mono", "JetBrains Mono", monospace;
   --shadow-hard: 7px 7px 0 var(--ink);
   --ease-out: cubic-bezier(.16, 1, .3, 1);
 }
