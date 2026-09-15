@@ -1,17 +1,15 @@
-# Jonah Chang — Robotics & Autonomous Systems
+# Jonah Chang — engineering portfolio
 
-Production portfolio site for Jonah Chang, built with Next.js, TypeScript, React, Tailwind CSS, Lucide icons, and accessible responsive HTML/CSS.
+Next.js portfolio for robotics, autonomous systems, mechanical design, controls, and computer vision. The visual system uses an Apple-inspired system font stack, black and graphite chapters, blue actions, and restrained scroll motion. Project facts and links come from `data/projects.ts`.
 
-## Development
+## Run
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open `http://localhost:3000`.
-
-## Build and checks
+## Verify
 
 ```bash
 npm run lint
@@ -19,4 +17,6 @@ npm run typecheck
 npm run build
 ```
 
-Project content lives in `data/projects.ts`. See `MEDIA_GUIDE.md` and `PROJECT_MEDIA_CHECKLIST.md` for asset replacement. Put the IRIS brief and resume in `public/docs/`.
+The homepage is in `app/page.tsx`, project routes are in `app/projects/[slug]/page.tsx`, and shared styles are in `app/globals.css`. See `MEDIA_GUIDE.md` for replacing the intentional image/video placeholders.
+
+The older static implementation and its design/product planning files were removed. Verified project descriptions and repository links were retained in the Next.js data source.

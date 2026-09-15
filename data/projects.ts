@@ -63,9 +63,9 @@ export const projects: Record<string, Project> = {
   },
   vortex: {
     slug: "vortex",
-    name: "Vortex",
+    name: "VEXVortex",
     fullName: "Competition Intelligence & Robotics Event Platform",
-    category: "Data infrastructure",
+    category: "VEX competition software",
     description: "Robotics event data, automation, API integration, competition analytics, and data infrastructure.",
     tags: ["API Integration", "Data Pipeline", "Analytics"],
     heroImage: null,
@@ -80,10 +80,10 @@ export const projects: Record<string, Project> = {
   },
   maribotics: {
     slug: "maribotics",
-    name: "Maribotics",
-    fullName: "Low-Cost Perception for Autonomous Marine Systems",
-    category: "Autonomous marine perception",
-    description: "Camera-based perception and ranging for autonomous and semi-autonomous marine platforms.",
+    name: "O.R.B.I.T.",
+    fullName: "Low-Cost 360° Perception and Ranging",
+    category: "Computer vision / edge perception",
+    description: "Low-cost perception research combining stereo cameras, YOLO, ranging, bearing, and persistent target tracking.",
     tags: ["Stereo Vision", "Object Detection", "Range Estimation"],
     heroImage: null,
     github: "https://github.com/jonahchang207/O.R.B.I.T",
@@ -96,3 +96,44 @@ export const projects: Record<string, Project> = {
     result: "Not yet documented",
   },
 };
+
+export type ArchiveProject = {
+  name: string;
+  area: string;
+  description: string;
+  href: string | null;
+};
+
+// Verified descriptions and links retained from the original portfolio source.
+export const archiveProjects: ArchiveProject[] = [
+  {
+    name: "Team 56S / Override",
+    area: "VEX V5 · C++ · PROS",
+    description: "Competition code for VEX team 56S: Odyssey-powered autonomous movement, driver control, and a state-based intake coordinating motors and pneumatics.",
+    href: "https://github.com/jonahchang207/56S-Override",
+  },
+  {
+    name: "Odyssey Simulator",
+    area: "TypeScript · Simulation",
+    description: "Browser tool for writing autonomous routines, testing them on a virtual VEX field, and copying the generated C++ back to the robot.",
+    href: "https://github.com/jonahchang207/odyssey-sim",
+  },
+  {
+    name: "Handwave",
+    area: "Python · MediaPipe",
+    description: "Webcam gesture input for macOS cursor movement, clicks, scrolling, dragging, and desktop switching.",
+    href: "https://github.com/jonahchang207/handwave",
+  },
+  {
+    name: "FrameSight",
+    area: "Python · YOLO11n",
+    description: "Real-time on-screen object detection rendered through a transparent, click-through Windows overlay.",
+    href: "https://github.com/jonahchang207/FrameSight",
+  },
+  {
+    name: "Harbor",
+    area: "C# · .NET",
+    description: "Local media download and conversion utility built with YoutubeExplode and ffmpeg.",
+    href: "https://github.com/jonahchang207/Harbor",
+  },
+];

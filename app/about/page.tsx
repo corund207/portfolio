@@ -1,18 +1,18 @@
 import { SiteHeader, Footer } from "@/components/site-shell";
 import { site } from "@/data/site";
 
-const interests = ["Robotics", "Autonomous Systems", "Control Systems", "Computer Vision", "Mechanical Design", "Embedded Computing", "Software Engineering"];
+const interests = ["Robotics and autonomous systems", "Control systems and motion planning", "Computer vision and perception", "Mechanical design and CAD", "Embedded and edge computing", "Engineering software"];
 
 export default function AboutPage() {
   return <><SiteHeader /><main id="main" className="inner-page about-page">
     <div className="page-intro">
       <h1>About Jonah.</h1>
-      <p>I&apos;m Jonah Chang, a student engineer at Cape Elizabeth High School interested in robotics, autonomous systems, controls, computer vision, and software.</p>
+      <p>I&apos;m Jonah Chang, a student engineer at Cape Elizabeth High School. I design robots, write control and perception software, and build the tools around those systems.</p>
     </div>
     <div className="about-content">
       <section>
-        <h2>Learning by building</h2>
-        <p>Most of what I learn comes from building things, testing them, figuring out why they don&apos;t work, and trying again.</p>
+        <h2>How I work</h2>
+        <p>Most of what I learn comes from building, testing, finding the failure, and revising the design. For VEX team 56S, I&apos;m the main programmer and primary CAD designer.</p>
       </section>
       <section>
         <h2>Current interests</h2>
