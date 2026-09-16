@@ -7,7 +7,7 @@ import { HomeExperience } from "@/components/home-experience";
 export const metadata: Metadata = {
   title: site.title,
   description: site.description,
-  metadataBase: new URL("https://jonahchang.dev"),
+  metadataBase: new URL("https://jonahchang207.vercel.app/"),
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
