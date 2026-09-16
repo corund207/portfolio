@@ -1,10 +1,8 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { projects, type Project } from "@/data/projects";
-import { SiteHeader, Footer, ProjectNav } from "@/components/site-shell";
-import { ProjectMedia, MediaPlaceholder } from "@/components/media";
-import { ArchitectureDiagram, EngineeringDecision, SystemFlow } from "@/components/diagrams";
-import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { SiteHeader, Footer } from "@/components/site-shell";
+import { ArrowUpRight } from "lucide-react";
 
 export function generateStaticParams() {
   return Object.keys(projects).map(slug => ({ slug }));
@@ -16,126 +14,58 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return project ? { title: `${project.name} — ${project.fullName} | Jonah Chang`, description: project.description } : {};
 }
 
-const irisRequirements = [
-  ["Degrees of freedom", "6"],
-  ["Primary manufacturing", "FDM 3D printing"],
-  ["Primary task", "Object sorting"],
-  ["Control", "Stepper-based joint control"],
-  ["Perception", "Camera-based object identification"],
-];
-
 function IrisPage() {
   const project = projects.iris;
-  return <ProjectLayout project={project} sections={["Overview", "Design", "Iteration", "Controls", "Results"]}>
+  return <ProjectLayout project={project}>
     <section className="detail-section" id="overview">
       <SectionTitle title="The problem" />
       <div className="question-block"><p>How can a capable robotic manipulator be designed at a dramatically lower cost while retaining enough precision, range of motion, and sensing capability for automated sorting?</p></div>
-      <div className="requirements-grid">{irisRequirements.map(([label, value]) => <div key={label}><span>{label}</span><strong>{value}</strong><small>Provisional</small></div>)}</div>
-    </section>
-
-    <section className="detail-section" id="design">
-      <SectionTitle title="Mechanical architecture" />
-      <MediaPlaceholder label="IRIS V9 exploded assembly" description="Exploded view showing structure, joints, and printed components" filename="iris/iris-v9-exploded.webp" type="diagram" />
-      <div className="two-column">
-        <div>
-          <h3>Why 6 degrees of freedom?</h3>
-          <p>Six joints provide the intended range of positioning and orientation for sorting. Reach and orientation limits remain to be documented.</p>
-          <h3>Why FDM 3D printing?</h3>
-          <p>FDM printing is the primary manufacturing method. Material choice, print orientation, and structural test results are still to be documented.</p>
-        </div>
-        <div className="axis-schematic" aria-label="Six-axis joint sequence"><span>J6</span><i /><span>J5</span><i /><span>J4</span><i /><span>J3</span><i /><span>J2</span><i /><span>J1</span><i /><b>BASE</b></div>
+      <div className="prose">
+        <p>Industrial six-axis manipulators can position and orient an end effector anywhere in a 3D workspace — which is why they dominate tasks from assembly to inspection, with more than half a million new installations in 2024 alone. But an industrial robot is never just an arm: it is hardware, control software, sensing, calibration, and integration support that small manufacturers, schools, and hobbyists cannot buy or maintain.</p>
+        <p>IRIS answers that gap with a low-cost, open-source six-axis arm built for a real task: vision-driven identification and pick-and-place sorting of components. The V9 hardware explored cycloidal joint reduction; the 2026–2027 redesign pushes affordability, reproducibility, efficiency, and adaptability — proven in the school robotics lab.</p>
+        <p>IRIS earned 3rd Place in the Engineering division at the Maine State Science Fair.</p>
       </div>
-      <div className="cycloidal">
-        <div>
-          <h3>Cycloidal reduction</h3>
-          <p className="section-caption">Joint transmission</p>
-          <p>The joint transmission uses cycloidal reduction. Backlash, output torque, bearing loading, and print durability remain open characterization questions.</p>
-          <SystemFlow items={["Stepper motor", "Eccentric", "Cycloidal disc", "Output pins", "Joint"]} vertical />
-        </div>
-        <MediaPlaceholder label="Cycloidal gearbox · exploded view" description="Exploded render of the selected joint transmission" filename="iris/cycloidal-exploded.webp" type="diagram" />
-      </div>
-      <div className="characterization-list">
-        <h3>Characterization still required</h3>
-        <div>{["Reduction ratio", "Backlash", "Motor torque", "Estimated output torque"].map(item => <p key={item}>{item}<span>Not yet measured</span></p>)}</div>
-      </div>
-    </section>
-
-    <section className="detail-section" id="iteration">
-      <SectionTitle title="Design iteration" />
-      <div className="iteration-line">{["V1", "V3", "V5", "V8", "V9"].map((version, index) => <div className={version === "V9" ? "current" : ""} key={version}><span>{version}</span>{index < 4 && <i />}</div>)}</div>
-      <div className="iteration-compare"><IterationCard version="V8" /><div className="change-arrow"><ArrowDown size={18} aria-hidden="true" /><span>Engineering change</span></div><IterationCard version="V9" /></div>
-    </section>
-
-    <section className="detail-section" id="controls">
-      <SectionTitle title="Control system" />
-      <ArchitectureDiagram items={["Joint geometry", "Forward kinematics", "End-effector pose", "Inverse kinematics", "Joint targets", "Trajectory planning", "Motor control", "Physical arm"].map(title => ({ title, detail: "Implementation status", status: "Planned" }))} />
-    </section>
-
-    <section className="detail-section" id="results">
-      <SectionTitle title="Results" />
-      <div className="result-callout"><h3>Maine State Science Fair</h3><strong>3rd Place</strong><span>Engineering Division</span></div>
-      <div className="media-queue">
-        <p>Project media to add</p>
-        <ul>{["Science fair presentation", "Prototype", "CAD", "Joint testing", "Physical hardware"].map(label => <li key={label}><span>{label}</span><code>{`/public/media/iris/${label.toLowerCase().replaceAll(" ", "-")}.webp`}</code></li>)}</ul>
-      </div>
-    </section>
-
-    <section className="detail-section phase-two">
-      <SectionTitle title="Phase 2" />
-      <div className="roadmap">{["Assemble mechanical system", "Characterize joint performance", "Implement motor control", "Forward kinematics", "Inverse kinematics", "Trajectory planning", "Vision-based object detection", "Autonomous sorting"].map((item, index) => <div key={item}><span>{String(index + 1).padStart(2, "0")}</span><p>{item}</p><small>Planned</small></div>)}</div>
     </section>
   </ProjectLayout>;
 }
 
-function IterationCard({ version }: { version: string }) {
-  return <article className="iteration-card">
-    <h3>Version {version}</h3>
-    <MediaPlaceholder label={`${version} assembly`} description="Assembly comparison · CAD render pending" filename={`iris/${version.toLowerCase()}-assembly.webp`} aspectRatio="4:3" />
-    <div><strong>What worked</strong><p>Documentation pending</p><strong>What failed</strong><p>Documentation pending</p><strong>What I learned</strong><p>Documentation pending</p></div>
-  </article>;
-}
-
-function OtherProject({ slug }: { slug: "odyssey" | "vortex" | "maribotics" }) {
+function OtherProject({ slug }: { slug: "odyssey" | "vortex" | "maribotics" | "sourcesight" }) {
   const project = projects[slug];
-  const isOdyssey = slug === "odyssey";
-  const isVortex = slug === "vortex";
-  const sections = isOdyssey ? ["Overview", "Architecture", "Control"] : isVortex ? ["Overview", "Architecture", "Pipeline"] : ["Overview", "Architecture", "Stereo Vision", "Future"];
-
-  return <ProjectLayout project={project} sections={sections}>
+  if (slug === "odyssey") return <ProjectLayout project={project}>
     <section className="detail-section" id="overview">
-      <SectionTitle title={isOdyssey ? "Localization" : isVortex ? "Problem" : "Perception system"} />
-      <p className="section-lede">{isOdyssey ? "Odyssey gives a VEX robot a position estimate it can use for repeatable autonomous motion." : isVortex ? "Competition data is useful only when it is available, current, and structured for the moment it is needed." : "Perception system development, camera integration, object detection, and range / position estimation."}</p>
+      <SectionTitle title="Localization" />
+      <p className="section-lede">Odyssey is an odometry and motion control template for VEX V5, built on PROS. It tracks the robot&apos;s field position and turns that estimate into repeatable autonomous motion — inspired by LemLib and EZ-Template.</p>
+      <div className="prose">
+        <p>From the running (x, y, heading) pose estimate, Odyssey provides PID turns and drives, boomerang moveToPose, and pure pursuit path following, with an optional Monte Carlo layer shadowing from V5 Distance Sensors. It installs as a PROS template — tuning guides and the API reference are in the documentation.</p>
+      </div>
     </section>
+  </ProjectLayout>;
 
-    <section className="detail-section" id="architecture">
-      <SectionTitle title={isOdyssey ? "Sensor fusion" : "Architecture"} />
-      <ArchitectureDiagram items={(isOdyssey ? ["Tracking wheels", "IMU", "Sensor fusion", "Pose estimate (x, y, θ)", "Controller", "Motor commands", "Robot"] : isVortex ? ["RobotEvents API", "Request layer", "Data processing", "PostgreSQL", "Application"] : ["Camera system", "Image acquisition", "Object detection", "Bearing / range estimation", "Object position", "Data transmission", "Autonomy system"]).map(title => ({ title }))} />
+  if (slug === "maribotics") return <ProjectLayout project={project}>
+    <section className="detail-section" id="overview">
+      <SectionTitle title="Perception system" />
+      <p className="section-lede">O.R.B.I.T. — Optical Ranging, Bearing &amp; Identification Telemetry — is research toward a modular, low-cost 360° perception sensor: detect, classify, range, bear, track, and export real-world targets in real time.</p>
+      <div className="prose">
+        <p>Every detection leaves the pipeline as a normalized target record — identity, timestamp, class, confidence, bearing, and range. Bench prototypes run from pipeline simulations to a calibrated stereo YOLO rig with persistent tracking and Kalman-smoothed depth; ranging is validated end-to-end, with a single-sensor slice, a 360° prototype, then productization ahead.</p>
+      </div>
     </section>
+  </ProjectLayout>;
 
-    {isVortex && <section className="detail-section" id="pipeline">
-      <SectionTitle title="Data pipeline" />
-      <EngineeringDecision>
-        <p>The proposed request engine rotates through configured keys. Request spacing, retry behavior, recovery under failure, and exact rate limits remain to be documented.</p>
-        <SystemFlow items={["Key 01", "Key 02", "Key 03", "Key 04", "…", "Key 10"]} />
-        <p className="decision-engine">ROUND-ROBIN REQUEST ENGINE <ArrowDown size={16} aria-hidden="true" /> ROBOTEVENTS</p>
-      </EngineeringDecision>
-    </section>}
+  if (slug === "vortex") return <ProjectLayout project={project}>
+    <section className="detail-section" id="overview">
+      <SectionTitle title="Problem" />
+      <p className="section-lede">Competition data is useful only when it is available, current, and structured for the moment it is needed.</p>
+      <div className="prose">
+        <p>A request engine rotates through configured keys in round-robin fashion, pulling from the RobotEvents API through a request layer into processing and PostgreSQL storage, feeding the application.</p>
+      </div>
+    </section>
+  </ProjectLayout>;
 
-    {isOdyssey && <section className="detail-section" id="control">
-      <SectionTitle title="Autonomous navigation" />
-      <MediaPlaceholder label="Odyssey field position / trajectory render" description="Future visualization: robot pose, coordinates, heading, trajectory, target point, and path curvature" filename="odyssey/field-trajectory.webp" type="diagram" />
-    </section>}
-
-    {slug === "maribotics" && <section className="detail-section" id="stereo-vision">
-      <SectionTitle title="P1 — Stereo vision" />
-      <div className="stereo-diagram"><span>LEFT CAMERA</span><span>RIGHT CAMERA</span><b>Correspondence → Disparity → Depth</b></div>
-      <div className="challenge-grid">{["USB synchronization", "Resolution limitations", "Camera calibration", "Baseline sensitivity", "Lighting", "Long-range accuracy", "Feature correspondence"].map(label => <div key={label}><strong>{label}</strong><p>Test observations and mitigation details pending.</p></div>)}</div>
-    </section>}
-
-    {slug === "maribotics" && <section className="detail-section" id="future">
-      <SectionTitle title="Future approaches" />
-      <div className="future-grid"><div><h3>P2 · AI depth estimation</h3><p>Concept</p></div><div><h3>P3 · Sensor fusion</h3><p>Future exploration</p></div></div>
-    </section>}
+  return <ProjectLayout project={project}>
+    <section className="detail-section" id="overview">
+      <SectionTitle title="Overview" />
+      <p className="section-lede">{project.description}</p>
+    </section>
   </ProjectLayout>;
 }
 
@@ -143,8 +73,7 @@ function SectionTitle({ title }: { title: string }) {
   return <div className="detail-heading"><h2>{title}</h2></div>;
 }
 
-function ProjectLayout({ project, sections, children }: { project: Project; sections: string[]; children: React.ReactNode }) {
-  const mediaLabel = project.slug === "iris" ? "IRIS V9 complete assembly" : project.slug === "vortex" ? "Vortex dashboard" : project.slug === "odyssey" ? "Odyssey autonomous navigation" : "Maribotics perception system";
+function ProjectLayout({ project, children }: { project: Project; children: React.ReactNode }) {
   return <><SiteHeader project={project.name} /><main id="main" className="project-page">
     <div className="project-hero">
       <h1>{project.name}</h1>
@@ -156,10 +85,7 @@ function ProjectLayout({ project, sections, children }: { project: Project; sect
         {project.documentation && <a href={project.documentation} target="_blank" rel="noreferrer">Documentation <ArrowUpRight size={15} aria-hidden="true" /></a>}
         {project.slug === "iris" && <span className="muted-link">Technical brief coming soon</span>}
       </div>
-      <ProjectMedia media={project.heroImage} fallbackLabel={mediaLabel} description="Replace with a project hero image or video still" filename={`${project.slug}/${project.slug}-hero.webp`} />
     </div>
-    <ProjectNav items={sections} />
-    <div className="project-meta-grid">{[["Role", project.role], ["Status", project.status], ["Focus", project.focus.join(" · ")], ["Tools", project.tools.join(" · ")], ["Result", project.result]].map(([label, value]) => <div key={label}><span>{label}</span><strong>{value}</strong></div>)}</div>
     {children}
   </main><Footer /></>;
 }
@@ -167,5 +93,5 @@ function ProjectLayout({ project, sections, children }: { project: Project; sect
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   if (!projects[slug]) notFound();
-  return slug === "iris" ? <IrisPage /> : <OtherProject slug={slug as "odyssey" | "vortex" | "maribotics"} />;
+  return slug === "iris" ? <IrisPage /> : <OtherProject slug={slug as "odyssey" | "vortex" | "maribotics" | "sourcesight"} />;
 }

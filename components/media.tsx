@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { Crosshair, Play } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Media, Video } from "@/data/projects";
 
 type PlaceholderProps = {
@@ -26,7 +26,26 @@ export function ProjectMedia({ media, fallbackLabel, description, aspectRatio = 
 
 export function ProjectVideo({ video, label, filename = "project/demo.mp4" }: { video?: Video; label: string; filename?: string }) {
   const [failedSrc, setFailedSrc] = useState<string | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const localSrc = video?.type === "local" ? video.src : null;
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el || !localSrc) return;
+    el.muted = true;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.play().catch(() => {});
+        } else {
+          el.pause();
+        }
+      },
+      { threshold: 0.25 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [localSrc]);
   if (!video || (video.type === "local" && failedSrc === video.src)) return <MediaPlaceholder label={label} description="Demonstration video pending" filename={filename} type="video" />;
   if (video.type === "youtube") return <div className="video-frame"><iframe loading="lazy" src={`https://www.youtube-nocookie.com/embed/${video.youtubeId}`} title={label} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen /></div>;
-  return <video className="video-frame" aria-label={label} controls preload="none" poster={video.poster} src={video.src} onError={() => setFailedSrc(video.src)}>Your browser does not support the video element.</video>;
+  return <video ref={videoRef} className="video-frame" aria-label={label} controls playsInline autoPlay muted loop preload="metadata" poster={video.poster} src={video.src} onError={() => setFailedSrc(video.src)}>Your browser does not support the video element.</video>;
 }

@@ -18,9 +18,11 @@ export type Project = {
   description: string;
   tags: string[];
   heroImage: Media;
+  assemblyImage?: Media;
   github: string | null;
   documentation?: string | null;
   demoVideo?: Video;
+  secondaryVideo?: Video;
   role: string;
   status: string;
   focus: string[];
@@ -37,6 +39,12 @@ export const projects: Record<string, Project> = {
     description: "Low-cost 3D-printed robotic manipulator designed for autonomous identification and sorting.",
     tags: ["6-DOF", "Mechanical Design", "Controls", "Computer Vision"],
     heroImage: null,
+    // Put files in public/media/iris, then replace these nulls (see MEDIA_GUIDE.md).
+    assemblyImage: null,
+    demoVideo: {
+      type: "local",
+      src: "/media/iris/iris-demo.mp4",
+    },
     github: null,
     role: "Project Lead / Sole Developer",
     status: "Phase 2",
@@ -54,7 +62,14 @@ export const projects: Record<string, Project> = {
     heroImage: null,
     github: "https://github.com/jonahchang207/odyssey",
     documentation: "https://jonahchang207.github.io/odyssey/",
-    demoVideo: null,
+    demoVideo: {
+      type: "local",
+      src: "/media/odyssey/odyssey-lab-solo-awp.mp4",
+    },
+    secondaryVideo: {
+      type: "local",
+      src: "/media/odyssey/odyssey-worlds-right.mp4",
+    },
     role: "Software Engineer",
     status: "Active",
     focus: ["Localization", "Motion Control"],
@@ -93,6 +108,23 @@ export const projects: Record<string, Project> = {
     status: "Exploration",
     focus: ["Camera Integration", "Object Detection", "Range / Position Estimation"],
     tools: ["Python", "YOLO", "Stereo Cameras"],
+    result: "Not yet documented",
+  },
+  sourcesight: {
+    slug: "sourcesight",
+    name: "SourceSight",
+    fullName: "Not yet documented",
+    category: "Not yet documented",
+    description: "SourceSight is in active development — full project details coming soon.",
+    tags: ["Not yet documented"],
+    heroImage: null,
+    github: null,
+    documentation: null,
+    demoVideo: null,
+    role: "Not yet documented",
+    status: "In development",
+    focus: ["Not yet documented"],
+    tools: ["Not yet documented"],
     result: "Not yet documented",
   },
 };

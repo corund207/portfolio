@@ -26,7 +26,7 @@ export function SiteHeader({ project }: { project?: string }) {
     return () => document.removeEventListener("keydown", escape);
   }, [open]);
   const links = <>
-    <Link href="/#projects" aria-current={pathname.startsWith("/projects") ? "page" : undefined} onClick={() => setOpen(false)}>Projects</Link>
+    <Link href="/projects" aria-current={pathname.startsWith("/projects") ? "page" : undefined} onClick={() => setOpen(false)}>Projects</Link>
     <Link href="/about" aria-current={pathname === "/about" ? "page" : undefined} onClick={() => setOpen(false)}>About</Link>
     {site.resumePath && <Link href={site.resumePath}>Resume</Link>}
     <a href={site.github} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={14} aria-hidden="true" /></a>
