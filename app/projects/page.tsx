@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowUpRight } from "lucide-react";
-import { projects } from "@/data/projects";
+import { projects, tint } from "@/data/projects";
 import { SiteHeader, Footer } from "@/components/site-shell";
 
 export const metadata: Metadata = {
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 // Mirrors the homepage showcase order, with Vortex last.
-const order = ["iris", "maribotics", "odyssey", "sourcesight", "vortex"];
+const order = ["iris", "odyssey", "maribotics", "sourcesight", "vortex"];
 
 function isDocumented(value: string) {
   return value !== "Not yet documented";
@@ -20,16 +20,16 @@ export default function ProjectsPage() {
   return <><SiteHeader /><main id="main" className="inner-page projects-page">
     <div className="page-intro">
       <h1>Projects.</h1>
-      <p>Robotic systems, software, and research — each with its own build log, media, and technical detail.</p>
+      <p>Robotic systems, software, and research. Each project has its own page with the technical detail behind it.</p>
     </div>
     <div className="project-card-list">
       {order.map(slug => {
         const project = projects[slug];
         const tags = project.tags.filter(isDocumented);
-        return <Link key={slug} href={`/projects/${slug}`} className="project-card">
+        return <Link key={slug} href={`/projects/${slug}`} className="project-card" style={tint(project)}>
           <span className="project-card-main">
+            {isDocumented(project.category) && <span className="project-card-eyebrow">{project.category}</span>}
             <span className="project-card-title">{project.name}</span>
-            <span className="project-card-eyebrow">{project.category}</span>
             <span className="project-card-description">{project.description}</span>
             {tags.length > 0 && <span className="project-card-tags">{tags.join("  ·  ")}</span>}
           </span>

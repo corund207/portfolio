@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { archiveProjects, projects } from "@/data/projects";
+import { archiveProjects, projects, tint } from "@/data/projects";
 import { site } from "@/data/site";
 import { Footer, SiteHeader } from "@/components/site-shell";
 import { HeroDots } from "@/components/hero-dots";
@@ -8,12 +8,13 @@ import { DotField } from "@/components/dot-field";
 import { KineticLine, Magnetic } from "@/components/hero-kinetic";
 import { ProjectMedia, ProjectVideo } from "@/components/media";
 
+// Each discipline borrows the accent of the project that leans on it most.
 const disciplines = [
-  ["Mechanical design", "From concept and CAD to manufacturable assemblies."],
-  ["Control systems", "Localization, motion planning, and feedback control."],
-  ["Computer vision", "Perception and ranging for real-world systems."],
-  ["Embedded computing", "Software that runs where the system does."],
-];
+  ["Mechanical design", "From concept and CAD to manufacturable assemblies.", projects.iris],
+  ["Control systems", "Localization, motion planning, and feedback control.", projects.odyssey],
+  ["Computer vision", "Perception and ranging for real-world systems.", projects.maribotics],
+  ["Embedded computing", "Software that runs where the system does.", projects.sourcesight],
+] as const;
 
 export default function Home() {
   return <><SiteHeader /><main id="main" className="site-main">
@@ -30,7 +31,7 @@ export default function Home() {
       </div>
     </section>
 
-    <section className="iris-showcase product-chapter" aria-labelledby="iris-title">
+    <section className="iris-showcase product-chapter" style={tint(projects.iris)} aria-labelledby="iris-title">
       <div className="showcase-heading">
         <p>{projects.iris.fullName}</p>
         <h2 id="iris-title">IRIS</h2>
@@ -47,37 +48,26 @@ export default function Home() {
       </div>
     </section>
 
-    <section className="project-showcase odyssey-showcase" aria-labelledby="odyssey-title">
+    <section className="project-showcase odyssey-showcase" style={tint(projects.odyssey)} aria-labelledby="odyssey-title">
       <div className="project-showcase-copy">
         <p>{projects.odyssey.name}</p>
         <h2 id="odyssey-title">Know where you are.<br />Control where you go.</h2>
         <p>{projects.odyssey.description}</p>
         <Link href="/projects/odyssey">Explore Odyssey <ArrowRight size={16} aria-hidden="true" /></Link>
       </div>
-      <div className="project-showcase-media immersive-frame dual-video">
+      <div className="project-showcase-media immersive-frame">
         <figure className="video-slot">
-          <figcaption><strong>Solo AWP — Lab Run</strong><span>Autonomous win-point routine · lab testing</span></figcaption>
+          <figcaption><strong>Lab run: solo AWP</strong><span>Autonomous win-point routine during lab testing</span></figcaption>
           <ProjectVideo video={projects.odyssey.demoVideo} label="Odyssey solo AWP lab run" filename="odyssey/odyssey-lab-solo-awp.mp4" />
         </figure>
         <figure className="video-slot">
-          <figcaption><strong>Worlds — Right-Side Autonomous</strong><span>Right-side autonomous routine · World Championship</span></figcaption>
+          <figcaption><strong>Worlds: right-side autonomous</strong><span>Right-side autonomous routine at the World Championship</span></figcaption>
           <ProjectVideo video={projects.odyssey.secondaryVideo} label="Odyssey right-side autonomous at Worlds" filename="odyssey/odyssey-worlds-right.mp4" />
         </figure>
       </div>
     </section>
 
-    <section className="iteration-chapter" aria-labelledby="iteration-title">
-      <div className="story-statement">
-        <p>Engineering process</p>
-        <h2 id="iteration-title">Built through iteration.</h2>
-        <p>I design, build, test, and revise mechanical and software systems—keeping the result grounded in what can actually be measured.</p>
-      </div>
-      <div className="discipline-specs">
-        {disciplines.map(([title, description]) => <article key={title}><h3>{title}</h3><p>{description}</p></article>)}
-      </div>
-    </section>
-
-    <section className="project-showcase orbit-showcase" aria-labelledby="orbit-title">
+    <section className="project-showcase orbit-showcase" style={tint(projects.maribotics)} aria-labelledby="orbit-title">
       <div className="project-showcase-copy">
         <p>{projects.maribotics.name}</p>
         <h2 id="orbit-title">Low-cost, 360°<br />perception.</h2>
@@ -85,21 +75,18 @@ export default function Home() {
         <Link href="/projects/maribotics">Explore O.R.B.I.T. <ArrowRight size={16} aria-hidden="true" /></Link>
       </div>
       <div className="project-definition">
-        <p>ORBIT is a low-cost perception system designed to give autonomous and semi-autonomous platforms a better understanding of their surroundings. The project combines inexpensive camera hardware, edge computing, and computer vision to detect objects and estimate information such as their position, bearing, and distance.</p>
+        <p>O.R.B.I.T. is a low-cost perception system designed to give autonomous and semi-autonomous platforms a better understanding of their surroundings. The project combines inexpensive camera hardware, edge computing, and computer vision to detect objects and estimate information such as their position, bearing, and distance.</p>
         <p>The current prototype focuses on stereo vision using dual cameras, with ongoing work in calibration, synchronization, depth estimation, and real-world testing.</p>
-        <p>ORBIT is being developed as a modular platform that can be adapted beyond its initial marine application to robotics, vehicles, and other autonomous systems.</p>
+        <p>O.R.B.I.T. is being developed as a modular platform that can be adapted beyond its initial marine application to robotics, vehicles, and other autonomous systems.</p>
       </div>
     </section>
 
-    <section className="project-showcase sourcesight-showcase" aria-labelledby="sourcesight-title">
+    <section className="project-showcase sourcesight-showcase" style={tint(projects.sourcesight)} aria-labelledby="sourcesight-title">
       <div className="project-showcase-copy">
         <p>{projects.sourcesight.name}</p>
         <h2 id="sourcesight-title">A clearer view<br />of your sources.</h2>
         <p>{projects.sourcesight.description}</p>
         <Link href="/projects/sourcesight">Explore SourceSight <ArrowRight size={16} aria-hidden="true" /></Link>
-      </div>
-      <div className="project-definition">
-        <p>SourceSight is in active development — full project details coming soon.</p>
       </div>
     </section>
 
@@ -114,6 +101,17 @@ export default function Home() {
           <p>{project.description}</p>
           {project.href && <a href={project.href} target="_blank" rel="noreferrer" aria-label={`${project.name} repository`}><ArrowUpRight size={19} aria-hidden="true" /></a>}
         </article>)}
+      </div>
+    </section>
+
+    <section className="iteration-chapter" aria-labelledby="iteration-title">
+      <div className="story-statement">
+        <p>Engineering process</p>
+        <h2 id="iteration-title">Built through iteration.</h2>
+        <p>I design, build, test, and revise mechanical and software systems, and keep every result grounded in what can actually be measured.</p>
+      </div>
+      <div className="discipline-specs">
+        {disciplines.map(([title, description, project]) => <article key={title} style={tint(project)}><h3>{title}</h3><p>{description}</p></article>)}
       </div>
     </section>
 

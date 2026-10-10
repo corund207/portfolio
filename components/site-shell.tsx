@@ -52,28 +52,3 @@ export function Footer() {
     <span className="copyright">© {new Date().getFullYear()}</span>
   </footer>;
 }
-
-export function ProjectNav({ items }: { items: string[] }) {
-  const [active, setActive] = useState("");
-  const nav = useRef<HTMLElement>(null);
-  const ids = items.map(item => item.toLowerCase().replaceAll(" ", "-"));
-  const key = ids.join("|");
-  useEffect(() => {
-    const elements = key.split("|").map(id => document.getElementById(id)).filter((el): el is HTMLElement => !!el);
-    const update = () => {
-      let current = elements[0]?.id ?? "";
-      for (const section of elements) if (section.getBoundingClientRect().top <= 190) current = section.id;
-      setActive(current);
-    };
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    return () => window.removeEventListener("scroll", update);
-  }, [key]);
-  useEffect(() => {
-    const link = nav.current?.querySelector<HTMLElement>('[aria-current="location"]');
-    if (link && nav.current) nav.current.scrollTo({ left: link.offsetLeft - nav.current.offsetLeft - 16, behavior: "instant" });
-  }, [active]);
-  return <nav ref={nav} className="project-nav" aria-label="Project sections">{items.map((item, index) =>
-    <a href={`#${ids[index]}`} onClick={() => setActive(ids[index])} aria-current={active === ids[index] ? "location" : undefined} key={item}>{item}</a>
-  )}</nav>;
-}

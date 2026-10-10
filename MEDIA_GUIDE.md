@@ -5,7 +5,6 @@
 Put your files in `public/media/iris/`, for example:
 
 ```text
-public/media/iris/iris-v9-hero.webp
 public/media/iris/iris-v9-assembly.webp
 public/media/iris/iris-demo.mp4
 ```
@@ -14,13 +13,9 @@ JPG, PNG, and WebP images work; use your actual extension. Export video as H.264
 
 ## 2. Set the IRIS media
 
-In `data/projects.ts`, inside `iris`, replace the existing `heroImage`, `assemblyImage`, and `demoVideo` values with:
+In `data/projects.ts`, inside `iris`, replace the existing `assemblyImage` and `demoVideo` values with:
 
 ```ts
-heroImage: {
-  src: "/media/iris/iris-v9-hero.webp",
-  label: "IRIS V9 complete robotic arm assembly",
-},
 assemblyImage: {
   src: "/media/iris/iris-v9-assembly.webp",
   label: "IRIS V9 assembly showing all six joints",

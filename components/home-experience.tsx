@@ -28,11 +28,11 @@ export function HomeExperience({ children }: { children: ReactNode }) {
       };
 
       reveal(".hero-heading, .showcase-heading, .project-showcase-copy, .contact-chapter");
-      reveal(".discipline-specs, .project-meta-grid, .requirements-grid", .1);
+      reveal(".discipline-specs", .1);
       reveal(".project-hero, .page-intro, .about-content, .contact-block", .08);
-      reveal(".detail-heading, .architecture-diagram, .iteration-line", .07);
+      reveal(".detail-heading", .07);
 
-      gsap.utils.toArray<HTMLElement>(".project-index article, .roadmap > div, .interest-list > div").forEach(row => {
+      gsap.utils.toArray<HTMLElement>(".project-index article, .project-card, .interest-list > div").forEach(row => {
         gsap.from(row, {
           opacity: 0, y: 16, duration: .65, ease: "power2.out",
           scrollTrigger: { trigger: row, start: "top 96%", once: true },
@@ -47,7 +47,7 @@ export function HomeExperience({ children }: { children: ReactNode }) {
         );
       });
 
-      gsap.utils.toArray<HTMLElement>(".showcase-statement, .archive-intro").forEach(statement => {
+      gsap.utils.toArray<HTMLElement>(".archive-intro").forEach(statement => {
         gsap.fromTo(statement,
           { opacity: .35, y: 28 },
           { opacity: 1, y: 0, ease: "none", scrollTrigger: { trigger: statement, start: "top 88%", end: "top 52%", scrub: 1.5 } },

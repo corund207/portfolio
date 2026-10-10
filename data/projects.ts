@@ -1,3 +1,5 @@
+import type { CSSProperties } from "react";
+
 export type Media = {
   src: string;
   label: string;
@@ -17,7 +19,8 @@ export type Project = {
   category: string;
   description: string;
   tags: string[];
-  heroImage: Media;
+  /** Signature color used for the project's labels, glows, and links. */
+  accent: string;
   assemblyImage?: Media;
   github: string | null;
   documentation?: string | null;
@@ -38,7 +41,7 @@ export const projects: Record<string, Project> = {
     category: "6-DOF robotic manipulator",
     description: "Low-cost 3D-printed robotic manipulator designed for autonomous identification and sorting.",
     tags: ["6-DOF", "Mechanical Design", "Controls", "Computer Vision"],
-    heroImage: null,
+    accent: "#bf5af2",
     // Put files in public/media/iris, then replace these nulls (see MEDIA_GUIDE.md).
     assemblyImage: null,
     demoVideo: {
@@ -50,7 +53,7 @@ export const projects: Record<string, Project> = {
     status: "Phase 2",
     focus: ["Mechanical Design", "Control Systems", "Computer Vision"],
     tools: ["Fusion 360", "C++", "ROS 2"],
-    result: "3rd Place — Engineering · Maine State Science Fair",
+    result: "3rd Place, Engineering · Maine State Science Fair",
   },
   odyssey: {
     slug: "odyssey",
@@ -59,7 +62,7 @@ export const projects: Record<string, Project> = {
     category: "Real-time robot localization",
     description: "Real-time localization and autonomous-motion library for VEX robotics.",
     tags: ["Odometry", "Sensor Fusion", "PID", "Pure Pursuit"],
-    heroImage: null,
+    accent: "#30d158",
     github: "https://github.com/jonahchang207/odyssey",
     documentation: "https://jonahchang207.github.io/odyssey/",
     demoVideo: {
@@ -83,7 +86,7 @@ export const projects: Record<string, Project> = {
     category: "VEX competition software",
     description: "Robotics event data, automation, API integration, competition analytics, and data infrastructure.",
     tags: ["API Integration", "Data Pipeline", "Analytics"],
-    heroImage: null,
+    accent: "#ff375f",
     github: null,
     documentation: null,
     demoVideo: null,
@@ -100,7 +103,7 @@ export const projects: Record<string, Project> = {
     category: "Computer vision / edge perception",
     description: "Low-cost perception research combining stereo cameras, YOLO, ranging, bearing, and persistent target tracking.",
     tags: ["Stereo Vision", "Object Detection", "Range Estimation"],
-    heroImage: null,
+    accent: "#ff9f0a",
     github: "https://github.com/jonahchang207/O.R.B.I.T",
     documentation: null,
     demoVideo: null,
@@ -115,9 +118,9 @@ export const projects: Record<string, Project> = {
     name: "SourceSight",
     fullName: "Not yet documented",
     category: "Not yet documented",
-    description: "SourceSight is in active development — full project details coming soon.",
+    description: "SourceSight is in active development. Full project details are coming soon.",
     tags: ["Not yet documented"],
-    heroImage: null,
+    accent: "#64d2ff",
     github: null,
     documentation: null,
     demoVideo: null,
@@ -128,6 +131,11 @@ export const projects: Record<string, Project> = {
     result: "Not yet documented",
   },
 };
+
+/** Exposes a project's accent as the `--tint` custom property for its section. */
+export function tint(project: Project) {
+  return { "--tint": project.accent } as CSSProperties;
+}
 
 export type ArchiveProject = {
   name: string;

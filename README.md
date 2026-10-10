@@ -1,4 +1,4 @@
-# Jonah Chang — engineering portfolio
+# Jonah Chang: engineering portfolio
 
 Next.js portfolio for robotics, autonomous systems, mechanical design, controls, and computer vision. The visual system uses an Apple-inspired system font stack, black and graphite chapters, blue actions, and restrained scroll motion. Project facts and links come from `data/projects.ts`.
 
