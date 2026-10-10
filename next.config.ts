@@ -9,6 +9,13 @@ export default function nextConfig(phase: string): NextConfig {
     devIndicators: false,
     // Don't disclose the framework version to scanners.
     poweredByHeader: false,
+    // The projects list and about page now live as homepage sections.
+    async redirects() {
+      return [
+        { source: "/projects", destination: "/#work", permanent: true },
+        { source: "/about", destination: "/#about", permanent: true },
+      ];
+    },
     async headers() {
       return [
         {

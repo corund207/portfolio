@@ -26,11 +26,11 @@ export function SiteHeader({ project }: { project?: string }) {
     return () => document.removeEventListener("keydown", escape);
   }, [open]);
   const links = <>
-    <Link href="/projects" aria-current={pathname.startsWith("/projects") ? "page" : undefined} onClick={() => setOpen(false)}>Projects</Link>
-    <Link href="/about" aria-current={pathname === "/about" ? "page" : undefined} onClick={() => setOpen(false)}>About</Link>
+    <Link href="/#work" aria-current={pathname.startsWith("/projects/") ? "page" : undefined} onClick={() => setOpen(false)}>Projects</Link>
+    <Link href="/#about" onClick={() => setOpen(false)}>About</Link>
     {site.resumePath && <Link href={site.resumePath}>Resume</Link>}
     <a href={site.github} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={14} aria-hidden="true" /></a>
-    {site.email && <a className="nav-contact" href={`mailto:${site.email}`}>Contact</a>}
+    <Link className="nav-contact" href="/#contact" onClick={() => setOpen(false)}>Contact</Link>
   </>;
   return <>
     <a className="skip-link" href="#main">Skip to content</a>
@@ -48,7 +48,7 @@ export function SiteHeader({ project }: { project?: string }) {
 export function Footer() {
   return <footer className="footer">
     <div><strong>Jonah Chang</strong><span>Robotics & autonomous systems</span></div>
-    <div className="footer-links"><a href={site.github} target="_blank" rel="noreferrer">GitHub ↗</a>{site.resumePath && <Link href={site.resumePath}>Resume</Link>}{site.email && <a href={`mailto:${site.email}`}>Contact</a>}</div>
+    <div className="footer-links"><a href={site.github} target="_blank" rel="noreferrer">GitHub ↗</a>{site.resumePath && <Link href={site.resumePath}>Resume</Link>}<Link href="/#contact">Contact</Link></div>
     <span className="copyright">© {new Date().getFullYear()}</span>
   </footer>;
 }

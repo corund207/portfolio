@@ -29,10 +29,10 @@ export function HomeExperience({ children }: { children: ReactNode }) {
 
       reveal(".hero-heading, .showcase-heading, .project-showcase-copy, .contact-chapter");
       reveal(".discipline-specs", .1);
-      reveal(".project-hero, .page-intro, .about-content, .contact-block", .08);
+      reveal(".project-hero", .08);
       reveal(".detail-heading", .07);
 
-      gsap.utils.toArray<HTMLElement>(".project-index article, .project-card, .interest-list > div").forEach(row => {
+      gsap.utils.toArray<HTMLElement>(".project-index article").forEach(row => {
         gsap.from(row, {
           opacity: 0, y: 16, duration: .65, ease: "power2.out",
           scrollTrigger: { trigger: row, start: "top 96%", once: true },
