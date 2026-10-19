@@ -166,6 +166,17 @@ svg { flex-shrink: 0; }
 .project-index article > p { max-width: 640px; color: var(--foreground-soft); line-height: 1.55; }
 .orbit-showcase { padding-bottom: clamp(90px, 10vw, 150px); }
 
+/* Home: live apps hub */
+.apps-chapter { padding: clamp(110px, 13vw, 190px) var(--gutter); scroll-margin-top: var(--header-height); }
+.app-grid { width: min(100%, 1320px); margin: 80px auto 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 18px; }
+.app-grid li { min-height: 300px; padding: 30px; display: flex; flex-direction: column; border: 1px solid rgba(245, 245, 247, .2); border-radius: 24px; transition: background .2s ease, border-color .2s ease; }
+.app-grid li:hover { background: rgba(245, 245, 247, .035); border-color: rgba(245, 245, 247, .34); }
+.app-kind { color: var(--muted); font-size: 14px; }
+.app-grid h3 { margin-top: 8px; color: var(--foreground-bright); font-size: clamp(26px, 2.4vw, 34px); line-height: 1.1; letter-spacing: var(--tracking-subtitle); }
+.app-description { margin-top: 14px; color: var(--foreground-soft); line-height: 1.55; }
+.app-host { margin-top: auto; padding-top: 24px; color: var(--muted); font-size: 14px; overflow-wrap: anywhere; }
+.app-grid .button-primary { margin-top: 16px; align-self: flex-start; }
+
 /* Home: more work */
 .project-index article > a { width: 48px; height: 48px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--accent); }
 .project-index article > a:hover { background: var(--accent); border-color: var(--accent); color: #fff; }

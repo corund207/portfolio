@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { archiveProjects, projects, tint } from "@/data/projects";
+import { liveApps } from "@/data/apps";
 import { site } from "@/data/site";
 import { Footer, SiteHeader } from "@/components/site-shell";
 import { HeroDots } from "@/components/hero-dots";
@@ -38,11 +39,27 @@ export default function Home() {
         <h1 id="hero-title" aria-label="Robotics. Engineered further."><KineticLine text="Robotics." /><br /><KineticLine text="Engineered further." /></h1>
         <p>Student engineer building autonomous systems across mechanical design, controls, perception, and software.</p>
         <div className="hero-actions">
-          <Magnetic><a className="button-primary" href="#work">View projects</a></Magnetic>
-          <Magnetic><a className="button-secondary" href={site.github} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={15} aria-hidden="true" /></a></Magnetic>
+          <Magnetic><a className="button-primary" href="#apps">Open an app</a></Magnetic>
+          <Magnetic><a className="button-secondary" href="#work">View projects</a></Magnetic>
         </div>
       </div>
-      <ScrollCue target="work" label="Scroll for more projects" />
+      <ScrollCue target="apps" label="Scroll to the live apps" />
+    </section>
+
+    <section id="apps" className="apps-chapter" aria-labelledby="apps-title">
+      <div className="archive-intro">
+        <h2 id="apps-title">Live apps.</h2>
+        <p>Everything that runs publicly, each at its own address on jonahchang.com.</p>
+      </div>
+      <ul className="app-grid">
+        {liveApps.map(app => <li key={app.host}>
+          <p className="app-kind">{app.kind}</p>
+          <h3>{app.name}</h3>
+          <p className="app-description">{app.description}</p>
+          <p className="app-host">{app.host}</p>
+          <a className="button-primary" href={`https://${app.host}`} aria-label={`Open ${app.name}`}>Open <ArrowUpRight size={15} aria-hidden="true" /></a>
+        </li>)}
+      </ul>
     </section>
 
     <section id="work" className="iris-showcase product-chapter" style={tint(projects.iris)} aria-labelledby="iris-title">
