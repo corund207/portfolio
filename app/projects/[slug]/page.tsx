@@ -13,7 +13,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const project = projects[slug];
   if (!project) return {};
   const title = isDocumented(project.fullName) ? `${project.name}: ${project.fullName}` : project.name;
-  return { title: `${title} | Jonah Chang`, description: project.description };
+  return {
+    title: `${title} | Jonah Chang`,
+    description: project.description,
+    alternates: { canonical: `/projects/${slug}` },
+  };
 }
 
 function IrisPage() {

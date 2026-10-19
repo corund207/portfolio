@@ -11,7 +11,10 @@ const inter = Inter({ subsets: ["latin"], axes: ["opsz"], display: "swap", varia
 export const metadata: Metadata = {
   title: site.title,
   description: site.description,
-  metadataBase: new URL("https://corund.vercel.app/"),
+  metadataBase: new URL("https://jonahchang.com/"),
+  // The site is also served from the MacServer (portfolio.jonahchang.com); a
+  // canonical link keeps search engines on jonahchang.com.
+  alternates: { canonical: "/" },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
