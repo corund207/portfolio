@@ -43,23 +43,7 @@ export default function Home() {
           <Magnetic><a className="button-secondary" href="#work">View projects</a></Magnetic>
         </div>
       </div>
-      <ScrollCue target="apps" label="Scroll to the live apps" />
-    </section>
-
-    <section id="apps" className="apps-chapter" aria-labelledby="apps-title">
-      <div className="archive-intro">
-        <h2 id="apps-title">Live apps.</h2>
-        <p>Everything that runs publicly, each at its own address on jonahchang.com.</p>
-      </div>
-      <ul className="app-grid">
-        {liveApps.map(app => <li key={app.host}>
-          <p className="app-kind">{app.kind}</p>
-          <h3>{app.name}</h3>
-          <p className="app-description">{app.description}</p>
-          <p className="app-host">{app.host}</p>
-          <a className="button-primary" href={`https://${app.host}`} aria-label={`Open ${app.name}`}>Open <ArrowUpRight size={15} aria-hidden="true" /></a>
-        </li>)}
-      </ul>
+      <ScrollCue target="work" label="Scroll to the projects" />
     </section>
 
     <section id="work" className="iris-showcase product-chapter" style={tint(projects.iris)} aria-labelledby="iris-title">
@@ -123,6 +107,22 @@ export default function Home() {
           </article>;
         })}
       </div>
+    </section>
+
+    <section id="apps" className="apps-chapter" aria-labelledby="apps-title">
+      <div className="archive-intro">
+        <h2 id="apps-title">Live apps.</h2>
+        <p>Everything that runs publicly, each at its own address on jonahchang.com.</p>
+      </div>
+      <ul className="app-grid">
+        {liveApps.map(app => <li key={app.host}>
+          <p className="app-kind">{app.kind}</p>
+          <h3>{app.name}</h3>
+          <p className="app-description">{app.description}</p>
+          <p className="app-host">{app.host}</p>
+          <a className="button-primary" href={`https://${app.host}`} aria-label={`Open ${app.name}`}>Open <ArrowUpRight size={15} aria-hidden="true" /></a>
+        </li>)}
+      </ul>
     </section>
 
     <section id="about" className="iteration-chapter" aria-labelledby="about-title">

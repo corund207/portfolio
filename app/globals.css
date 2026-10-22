@@ -304,7 +304,7 @@ svg { flex-shrink: 0; }
 
 @media (max-width: 520px) {
   .product-hero { padding-top: 64px; }
-  .hero-heading h1 { font-size: 48px; line-height: 1.02; }
+  .hero-heading h1 { font-size: 43px; line-height: 1.02; }
   .hero-actions { gap: 8px; }
   .showcase-heading h2 { font-size: 68px; }
   .showcase-media { height: 420px; margin-top: 48px; }
