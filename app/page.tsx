@@ -39,8 +39,8 @@ export default function Home() {
         <h1 id="hero-title" aria-label="Robotics. Engineered further."><KineticLine text="Robotics." /><br /><KineticLine text="Engineered further." /></h1>
         <p>Student engineer building autonomous systems across mechanical design, controls, perception, and software.</p>
         <div className="hero-actions">
-          <Magnetic><a className="button-primary" href="#apps">Open an app</a></Magnetic>
-          <Magnetic><a className="button-secondary" href="#work">View projects</a></Magnetic>
+          <Magnetic><a className="button-primary" href="#work">View projects</a></Magnetic>
+          <Magnetic><a className="button-secondary" href="#apps">Open an app</a></Magnetic>
         </div>
       </div>
       <ScrollCue target="work" label="Scroll to the projects" />

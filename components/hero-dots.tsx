@@ -10,7 +10,9 @@ type Dot = {
 };
 
 const MAX_DPR = 1.75;
+const MOBILE_MAX_DPR = 1.25;
 const EVENT_RADIUS = 260;
+const TOUCH_EVENT_RADIUS = 150;
 const MAX_OFFSET = 70;
 const STIFFNESS = 0.022;
 const DAMPING = 0.9;
@@ -21,8 +23,12 @@ export function HeroDots() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const ctx = canvas.getContext("2d");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reducedMotion.matches) return;
+    const mobileLayout = window.matchMedia("(max-width: 700px)");
+    const coarsePointer = window.matchMedia("(pointer: coarse)");
+    const isMobile = () => mobileLayout.matches || coarsePointer.matches;
+    const ctx = canvas.getContext("2d", { alpha: true, desynchronized: true });
     if (!ctx) return;
 
     let width = 0;
@@ -30,6 +36,8 @@ export function HeroDots() {
     let raf = 0;
     let running = true;
     let t0 = -1;
+    let pixelRatio = 1;
+    let interactionRadius = EVENT_RADIUS;
     let dots: Dot[] = [];
     let firstLayout = true;
     let lastScrollY = typeof window !== "undefined" ? window.scrollY : 0;
@@ -39,12 +47,15 @@ export function HeroDots() {
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
+      const mobile = isMobile();
+      pixelRatio = Math.min(window.devicePixelRatio || 1, mobile ? MOBILE_MAX_DPR : MAX_DPR);
+      interactionRadius = mobile ? TOUCH_EVENT_RADIUS : EVENT_RADIUS;
+      const dpr = pixelRatio;
       width = Math.max(1, Math.floor(rect.width * dpr));
       height = Math.max(1, Math.floor(rect.height * dpr));
       canvas.width = width;
       canvas.height = height;
-      const spacing = Math.max(26, Math.min(40, Math.floor(rect.width * dpr / 52)));
+      const spacing = Math.max(mobile ? 34 : 26, Math.min(mobile ? 48 : 40, Math.floor(rect.width * dpr / (mobile ? 40 : 52))));
       const cols = Math.max(1, Math.floor(width / spacing));
       const rows = Math.max(1, Math.floor(height / spacing));
       const startX = (width - (cols - 1) * spacing) / 2;
@@ -81,10 +92,9 @@ export function HeroDots() {
 
     const toLocal = (clientX: number, clientY: number) => {
       const rect = canvas.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
       return {
-        x: (clientX - rect.left) * dpr,
-        y: (clientY - rect.top) * dpr,
+        x: (clientX - rect.left) * pixelRatio,
+        y: (clientY - rect.top) * pixelRatio,
         inside: clientX >= rect.left && clientX <= rect.right && clientY >= rect.top && clientY <= rect.bottom,
       };
     };
@@ -106,6 +116,10 @@ export function HeroDots() {
       mouse.active = false;
       mouse.vx = 0;
       mouse.vy = 0;
+    };
+
+    const onPointerEnd = (event: PointerEvent) => {
+      if (event.pointerType !== "mouse") onLeave();
     };
 
     const onScroll = () => {
@@ -137,10 +151,10 @@ export function HeroDots() {
           const dx = x - mouse.x;
           const dy = y - mouse.y;
           const dist = Math.hypot(dx, dy);
-          if (dist > 1 && dist < EVENT_RADIUS) {
+          if (dist > 1 && dist < interactionRadius) {
             const nx = dx / dist;
             const ny = dy / dist;
-            const fall = 1 - dist / EVENT_RADIUS;
+            const fall = 1 - dist / interactionRadius;
             const force = fall * fall * 16;
             dot.vx += nx * force - ny * force * 0.55 + mouse.vx * 0.06 * fall;
             dot.vy += ny * force + nx * force * 0.55 + mouse.vy * 0.06 * fall;
@@ -169,16 +183,16 @@ export function HeroDots() {
         const introK = Math.min(1, Math.max(0, (age - dot.born) / 0.8));
         const fling = Math.min(1, Math.hypot(dot.ox, dot.oy) / 40) * introK;
         const alpha = 0.26 + fling * 0.6 + speedK * 0.08;
-        const radius = (1.5 + fling * 1.2) * Math.min(window.devicePixelRatio || 1, MAX_DPR);
+        const dotRadius = (1.5 + fling * 1.2) * pixelRatio;
         const drawY = dot.hy + dot.oy + flow;
         ctx.fillStyle = fling > 0.55
           ? `rgba(41,151,255,${alpha.toFixed(3)})`
           : `rgba(245,245,247,${alpha.toFixed(3)})`;
         ctx.beginPath();
         if (speedK > 0.05) {
-          ctx.ellipse(dot.hx + dot.ox, drawY, radius, radius * (1 + speedK * 1.6), 0, 0, Math.PI * 2);
+          ctx.ellipse(dot.hx + dot.ox, drawY, dotRadius, dotRadius * (1 + speedK * 1.6), 0, 0, Math.PI * 2);
         } else {
-          ctx.arc(dot.hx + dot.ox, drawY, radius, 0, Math.PI * 2);
+          ctx.arc(dot.hx + dot.ox, drawY, dotRadius, 0, Math.PI * 2);
         }
         ctx.fill();
       }
@@ -208,9 +222,15 @@ export function HeroDots() {
 
     resize();
     raf = requestAnimationFrame(frame);
+    const onMediaChange = () => resize();
     window.addEventListener("resize", resize);
+    mobileLayout.addEventListener("change", onMediaChange);
+    coarsePointer.addEventListener("change", onMediaChange);
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("pointermove", onMove, { passive: true });
+    window.addEventListener("pointerdown", onMove, { passive: true });
+    window.addEventListener("pointerup", onPointerEnd, { passive: true });
+    window.addEventListener("pointercancel", onPointerEnd, { passive: true });
     document.addEventListener("mouseleave", onLeave);
     document.addEventListener("visibilitychange", onVisibility);
 
@@ -219,8 +239,13 @@ export function HeroDots() {
       cancelAnimationFrame(raf);
       observer.disconnect();
       window.removeEventListener("resize", resize);
+      mobileLayout.removeEventListener("change", onMediaChange);
+      coarsePointer.removeEventListener("change", onMediaChange);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerdown", onMove);
+      window.removeEventListener("pointerup", onPointerEnd);
+      window.removeEventListener("pointercancel", onPointerEnd);
       document.removeEventListener("mouseleave", onLeave);
       document.removeEventListener("visibilitychange", onVisibility);
     };
